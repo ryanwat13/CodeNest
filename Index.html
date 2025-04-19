@@ -6,6 +6,30 @@
   <title>Advanced Web Page</title>
   <style>
   
+  /* Adjusting the width of the dropdown menu */
+#theme-dropdown {
+  display: none;
+  background-color: white;
+  position: absolute;
+  top: 100%;
+  left: 10%; /* Shift the submenu to the right of the button */
+  margin-top: 10px;
+  margin-left: 10px; /* Add a small margin to create space */
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  transition: all 0.3s ease-in-out;
+  z-index: 999;
+  width: 160px; /* Increase this value to make the text box wider */
+  max-width: 100%;
+  overflow: hidden;
+}
+  
+  html {
+  font-size: calc(5px + 0.5vw); /* Dynamically scales font size with window width */
+}
+ 
+  
   .theme-search-container {
   display: flex;
   align-items: center; /* Vertically align items */
@@ -67,6 +91,7 @@
 }
  
  .container-grid {
+  grid-template-columns: 1fr;
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* Exactly 2 per row */
   gap: 2rem;
@@ -249,10 +274,13 @@
     }
 
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-    }
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  line-height: 1.5;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
 
     header {
       background: var(--accent-color);
@@ -365,11 +393,10 @@
     }
 
     footer {
-      text-align: center;
-      padding: 2rem;
-      margin-top: 4rem;
-      color: var(--text-color);
-    }
+  font-size: calc(5px + 0.5vw); /* Footer text size scales */
+  text-align: center;
+  padding: 1rem;
+}
 
     .collapsible {
       background: var(--button-bg);
@@ -380,7 +407,7 @@
       border: none;
       text-align: center;
       outline: none;
-      font-size: 1.5rem;
+      font-size: 1.60rem;
       border-radius: 10px;
       margin-top: 1rem;
       min-width: 160px;
@@ -416,7 +443,7 @@
       font-size: 0.9rem;
       color: #222;
       border-radius: 5px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
       border: 2px solid #ccc;
       text-align: left;
       white-space: pre-wrap;
@@ -453,10 +480,10 @@
       background: var(--button-bg);
       color: var(--button-text-color);
       border: none;
-      border-radius: 4px;
-      padding: 5px 10px;
+      border-radius: 6px;
+      padding: 10px 20px;
       cursor: pointer;
-      font-size: 14px;
+      font-size: 16px;
       display: flex;
       align-items: center;
       transition: all 0.2s ease;
@@ -476,10 +503,10 @@
   background: var(--button-bg);
   color: var(--button-text-color);
   border: none;
-  border-radius: 4px;
-  padding: 5px 10px;
+  border-radius: 6px;
+  padding: 10px 20px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 16px;
   display: flex;
   align-items: center;
   margin-left: 10px;
