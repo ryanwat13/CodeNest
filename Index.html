@@ -6,6 +6,32 @@
   <title>Advanced Web Page</title>
   <style>
   
+  .suggestions {
+  position: absolute;
+  background: white; /* Can also be set to var(--bg-color) to follow the theme */
+  border: 1px solid var(--accent-color); /* Border matches the theme accent color */
+  border-radius: 20px; /* Circular corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-height: 200px;
+  overflow-y: auto;
+  width: 100%;
+  z-index: 1000;
+  display: none;
+  margin-top: 25px;
+}
+
+.suggestions div {
+  padding: 10px; /* Space inside each suggestion */
+  color: var(--text-color); /* Dynamic text color based on theme */
+  cursor: pointer; /* Pointer cursor for hover effect */
+  font-size: 1rem; /* Adjust font size */
+}
+
+.suggestions div:hover {
+  background: var(--button-hover-bg); /* Dynamic hover background color based on theme */
+  color: var(--button-text-color); /* Dynamic text color for contrast */
+}
+  
   /* Adjusting the width of the dropdown menu */
 #theme-dropdown {
   display: none;
@@ -583,7 +609,7 @@
     <input 
       type="text" 
       id="search-input" 
-      placeholder="Search for files or themes..." 
+      placeholder="Search for files" 
       oninput="filterFiles()" 
     />
     <button onclick="filterFiles()">🔍</button>
@@ -1344,6 +1370,132 @@ function downloadCode(elementId, filename) {
       tooltip.textContent = "Download file";
     }, 300);
   }, 2000);
+}
+
+const searchInput = document.getElementById('search-input');
+const searchForm = document.getElementById('search-form'); // Assuming you have a form element wrapping your search
+const suggestions = document.createElement('div');
+suggestions.className = 'suggestions';
+searchInput.parentNode.appendChild(suggestions);
+
+const themeDropdown = document.getElementById('theme-dropdown');
+const submenus = document.querySelectorAll('.dropdown-submenu');
+
+// Function to populate suggestions
+function populateSuggestions(query) {
+  const sections = document.querySelectorAll('.container-grid section');
+
+  // Filter for items that start with the query
+  const matches = Array.from(sections).filter(section =>
+    section.querySelector('h2').textContent.toLowerCase().startsWith(query)
+  );
+
+  // Populate the suggestions container
+  suggestions.innerHTML = matches.map(match => `<div>${match.querySelector('h2').textContent}</div>`).join('');
+  suggestions.style.display = matches.length ? 'block' : 'none';
+
+  // Add click event to each suggestion
+  const suggestionItems = suggestions.querySelectorAll('div');
+  suggestionItems.forEach(item => {
+    item.addEventListener('click', () => {
+      searchInput.value = item.textContent; // Populate search bar with suggestion text
+      suggestions.style.display = 'none'; // Hide suggestions after selecting one
+
+      // Trigger the search functionality
+      if (searchForm) {
+        searchForm.submit(); // Automatically submit the form
+      } else {
+        triggerSearch(searchInput.value); // Call custom search function if no form is used
+      }
+
+      // Trigger the filterFiles function after selecting a suggestion
+      filterFiles();
+    });
+  });
+}
+
+// Event listener for typing in the search bar
+searchInput.addEventListener('input', () => {
+  const query = searchInput.value.toLowerCase();
+
+  // Populate suggestions based on current input
+  populateSuggestions(query);
+
+  // Position the suggestions container below the search bar
+  const rect = searchInput.getBoundingClientRect();
+  suggestions.style.top = `${searchInput.offsetHeight + 10}px`; // Add 10px spacing below the search bar
+  suggestions.style.left = `${rect.left}px`; // Align to the left of the search bar
+  suggestions.style.width = `${searchInput.offsetWidth}px`; // Match the search bar's width
+});
+
+// Event listener for focusing on the search bar
+searchInput.addEventListener('focus', () => {
+  const query = searchInput.value.toLowerCase();
+
+  // Repopulate suggestions if there's already text in the input
+  if (query) {
+    populateSuggestions(query);
+  }
+
+  // Hide the theme dropdown and submenus when focusing on the search bar
+  themeDropdown.style.display = 'none';
+  submenus.forEach(submenu => {
+    submenu.style.display = 'none';
+  });
+
+  // Position the suggestions container below the search bar
+  const rect = searchInput.getBoundingClientRect();
+  suggestions.style.top = `${searchInput.offsetHeight + 10}px`; // Add 10px spacing below the search bar
+  suggestions.style.left = `${rect.left}px`; // Align to the left of the search bar
+  suggestions.style.width = `${searchInput.offsetWidth}px`; // Match the search bar's width
+});
+
+// Hide suggestions and submenus when clicking outside
+document.addEventListener('click', (event) => {
+  // Check if the click is outside the search input, suggestions box, and theme dropdown
+  if (!searchInput.contains(event.target) && !suggestions.contains(event.target)) {
+    suggestions.style.display = 'none';
+  }
+
+  // Hide submenus if the click is outside the theme dropdown
+  if (!themeDropdown.contains(event.target)) {
+    submenus.forEach(submenu => {
+      submenu.style.display = 'none';
+    });
+  }
+});
+
+// Prevent the dropdown from disappearing when clicking inside it
+suggestions.addEventListener('click', (event) => {
+  event.stopPropagation();
+});
+
+// Custom search function (if no form is used)
+function triggerSearch(query) {
+  console.log(`Performing search for: ${query}`);
+  // Add your search logic here (e.g., fetch results or navigate)
+}
+
+// Function to filter files based on the search bar input
+function filterFiles() {
+  // Get the search query (convert to lowercase for case-insensitive search)
+  const query = document.getElementById('search-input').value.toLowerCase();
+
+  // Get all sections in the grid
+  const sections = document.querySelectorAll('.container-grid section');
+
+  // Loop through each section and check if it matches the query
+  sections.forEach((section) => {
+    const heading = section.querySelector('h2').textContent.toLowerCase(); // Get the text content of the <h2> tag
+
+    if (heading.includes(query)) {
+      // If the heading includes the query, show the section
+      section.style.display = 'block';
+    } else {
+      // Otherwise, hide the section
+      section.style.display = 'none';
+    }
+  });
 }
   </script>
 </body>
