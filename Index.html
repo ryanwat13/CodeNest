@@ -6,11 +6,82 @@
   <title>Advanced Web Page</title>
   <style>
   
+  .theme-search-container {
+  display: flex;
+  align-items: center; /* Vertically align items */
+  gap: 20px; /* Space between search bar and button */
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+}
+
+.search-bar input {
+  padding: 10px;
+  width: 250px; /* Adjust width as needed */
+  border: 2px solid var(--accent-color);
+  border-radius: 20px 0 0 20px;
+  outline: none;
+  font-size: 1rem;
+}
+
+.search-bar button {
+  padding: 10px 15px;
+  background: var(--button-bg);
+  color: var(--button-text-color);
+  border: none;
+  border-radius: 0 20px 20px 0;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s ease;
+}
+
+.search-bar button:hover {
+  background: var(--button-hover-bg);
+}
+
+.theme-toggle-container {
+  display: flex;
+  align-items: center;
+}
+
+.toggle-theme {
+  padding: 10px 20px;
+  background: var(--button-bg);
+  color: var(--button-text-color);
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s ease;
+}
+
+.toggle-theme:hover {
+  background: var(--button-hover-bg);
+}
+  
 	.header-logo {
     height: 70px; /* Adjust the height as needed */
     vertical-align: middle; /* Align the logo vertically with other header elements */
 }
  
+ .container-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Exactly 2 per row */
+  gap: 2rem;
+}
+
+.container-grid section:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+
+
+
+
 	
     :root {
       --bg-color: #e3f2fd; /* Light blue background */
@@ -305,7 +376,7 @@
       color: white;
       cursor: pointer;
       padding: 1.5rem 2rem;
-      width: 25%;
+      width: 100%;
       border: none;
       text-align: center;
       outline: none;
@@ -448,6 +519,22 @@
       transition: opacity 0.3s;
       font-size: 12px;
     }
+	
+	@media (max-width: 768px) {
+  .theme-search-container {
+    flex-direction: column; /* Stack elements vertically */
+    align-items: stretch; /* Stretch to full width */
+    gap: 10px; /* Reduce spacing for small screens */
+  }
+
+  .search-bar input {
+    width: 100%; /* Take full width on small screens */
+  }
+
+  .toggle-theme {
+    width: 100%; /* Make the button full width */
+  }
+}
 
     .tooltip .tooltiptext.show {
       visibility: visible;
@@ -463,55 +550,72 @@
             </a>
         </div>
 		<div>
-			
-        <div class="theme-toggle-container">
-          <button class="toggle-theme" onclick="toggleDropdown()">Change Theme</button>
-          <div id="theme-dropdown" class="dropdown-menu">
-            <a href="#" onclick="toggleSubmenu('blue')">Blue Themes</a>
-            <a href="#" onclick="toggleSubmenu('red')">Red Themes</a>
-            <a href="#" onclick="toggleSubmenu('black')">Black Themes</a>
-            <a href="#" onclick="toggleSubmenu('white')">White Themes</a>
-          </div>
-          <div id="blue-submenu" class="dropdown-submenu">
-            <a href="#" onclick="changeTheme('light-blue')">Light Blue</a>
-            <a href="#" onclick="changeTheme('dark')">Dark Blue</a>
-          </div>
-          <div id="red-submenu" class="dropdown-submenu">
-            <a href="#" onclick="changeTheme('light-red')">Light Red</a>
-            <a href="#" onclick="changeTheme('red')">Dark Red</a>
-          </div>
-          <div id="black-submenu" class="dropdown-submenu">
-            <a href="#" onclick="changeTheme('black')">Dark Black</a>
-            <a href="#" onclick="changeTheme('light-black')">Gray</a>
-          </div>
-          <div id="white-submenu" class="dropdown-submenu">
-            <a href="#" onclick="changeTheme('light-white')">Off-White</a>
-            <a href="#" onclick="changeTheme('white')">Pure White</a>
-          </div>
-        </div>
+		<div class="theme-search-container">
+  <!-- Search Bar -->
+  <div class="search-bar">
+    <input 
+      type="text" 
+      id="search-input" 
+      placeholder="Search for files or themes..." 
+      oninput="filterFiles()" 
+    />
+    <button onclick="filterFiles()">🔍</button>
+  </div>
+
+  <!-- Change Theme Button -->
+  <div class="theme-toggle-container">
+    <button class="toggle-theme" onclick="toggleDropdown()">Change Theme</button>
+    <div id="theme-dropdown" class="dropdown-menu">
+      <a href="#" onclick="toggleSubmenu('blue')">Blue Themes</a>
+      <a href="#" onclick="toggleSubmenu('red')">Red Themes</a>
+      <a href="#" onclick="toggleSubmenu('black')">Black Themes</a>
+      <a href="#" onclick="toggleSubmenu('white')">White Themes</a>
+    </div>
+    <div id="blue-submenu" class="dropdown-submenu">
+      <a href="#" onclick="changeTheme('light-blue')">Light Blue</a>
+      <a href="#" onclick="changeTheme('dark')">Dark Blue</a>
+    </div>
+    <div id="red-submenu" class="dropdown-submenu">
+      <a href="#" onclick="changeTheme('light-red')">Light Red</a>
+      <a href="#" onclick="changeTheme('red')">Dark Red</a>
+    </div>
+    <div id="black-submenu" class="dropdown-submenu">
+      <a href="#" onclick="changeTheme('black')">Dark Black</a>
+      <a href="#" onclick="changeTheme('light-black')">Gray</a>
+    </div>
+    <div id="white-submenu" class="dropdown-submenu">
+      <a href="#" onclick="changeTheme('light-white')">Off-White</a>
+      <a href="#" onclick="changeTheme('white')">Pure White</a>
+    </div>
+  </div>
+</div>
       </div>
     </nav>
   </header>
 
   <section class="container" id="home">
-    <h1>Welcome!</h1>
-    <p>Here You Can Look Around For Some Fun Files, You Might Find Something To Play With Here Too</p>
-  </section>
+  <h1>Welcome!</h1>
+  <p>Here You Can Look Around For Some Fun Files, You Might Find Something To Play With Here Too</p>
+</section>
 
-  <section class="container" id="autotyper">
-  <div class="heading-container">
-    <h2>AutoTyper.bat</h2>
-    <button class="copy-btn tooltip" onclick="copyCode('autotyper-code')">
-      <span class="tooltiptext" id="autotyper-tooltip">Copy to clipboard</span>
-      📋 Copy Code
-    </button>
-    <button class="download-btn tooltip" onclick="downloadCode('autotyper-code', 'AutoTyper.bat')">
-      <span class="tooltiptext" id="autotyper-download-tooltip">Download file</span>
-      📥 Download
-    </button>
-  </div>
-  <button class="collapsible">📄 Click to View AutoTyper.bat Code</button>
-  <div class="content" id="autotyper-code">
+<section class="container">
+  <div class="container-grid">
+
+    <!-- START AutoTyper -->
+    <section id="autotyper">
+      <div class="heading-container">
+        <h2>AutoTyper.bat</h2>
+        <button class="copy-btn tooltip" onclick="copyCode('autotyper-code')">
+          <span class="tooltiptext" id="autotyper-tooltip">Copy to clipboard</span>
+          📋 Copy Code
+        </button>
+        <button class="download-btn tooltip" onclick="downloadCode('autotyper-code', 'AutoTyper.bat')">
+          <span class="tooltiptext" id="autotyper-download-tooltip">Download file</span>
+          👅 Download
+        </button>
+      </div>
+      <button class="collapsible">📄 Click to View AutoTyper.bat Code</button>
+      <div class="content" id="autotyper-code">
 @echo off
 chcp 65001 >nul
 title 🚀 Auto Typer - By Ryan Watson
@@ -607,29 +711,31 @@ for /f "tokens=1-3 delims=/-. " %%a in ("%date%") do (
     set "year=%%c"
 )
 
-echo [38;2;0;255;0m╔════════════════════════════════════════════════════════════════════════════╗[0m
-echo [38;2;0;200;0m║                        Auto Typer - By Ryan Watson                         ║[0m
-echo [38;2;0;150;0m╠════════════════════════════════════════════════════════════════════════════╣[0m
-echo [38;2;0;200;0m║                          %month%-%day%-%year%                                         ║[0m
-echo [38;2;0;255;0m╚════════════════════════════════════════════════════════════════════════════╝[0m
+echo [38;2;0;255;0m╔════════════════════════════════════════════════════════════════════════════╗[0m
+echo [38;2;0;200;0m║                        Auto Typer - By Ryan Watson                         ║[0m
+echo [38;2;0;150;0m╠════════════════════════════════════════════════════════════════════════════╣[0m
+echo [38;2;0;200;0m║                          %month%-%day%-%year%                                         ║[0m
+echo [38;2;0;255;0m╚════════════════════════════════════════════════════════════════════════════╝[0m
 echo.
-  </div>
-</section>
-  
-<section class="container" id="customcmd">
-  <div class="heading-container">
-    <h2>CustomCMD.bat</h2>
-    <button class="copy-btn tooltip" onclick="copyCode('customcmd-code')">
-      <span class="tooltiptext" id="customcmd-tooltip">Copy to clipboard</span>
-      📋 Copy Code
-    </button>
-    <button class="download-btn tooltip" onclick="downloadCode('customcmd-code', 'CustomCMD.bat')">
-      <span class="tooltiptext" id="customcmd-download-tooltip">Download file</span>
-      📥 Download
-    </button>
-  </div>
-  <button class="collapsible">📄 Click to View CustomCMD.bat Code</button>
-  <div class="content" id="customcmd-code">
+
+      </div>
+    </section>
+
+    <!-- START CustomCMD -->
+    <section id="customcmd">
+      <div class="heading-container">
+        <h2>CustomCMD.bat</h2>
+        <button class="copy-btn tooltip" onclick="copyCode('customcmd-code')">
+          <span class="tooltiptext" id="customcmd-tooltip">Copy to clipboard</span>
+          📋 Copy Code
+        </button>
+        <button class="download-btn tooltip" onclick="downloadCode('customcmd-code', 'CustomCMD.bat')">
+          <span class="tooltiptext" id="customcmd-download-tooltip">Download file</span>
+          👅 Download
+        </button>
+      </div>
+      <button class="collapsible">📄 Click to View CustomCMD.bat Code</button>
+      <div class="content" id="customcmd-code">
 @echo off
 cls
 title Batchcc
@@ -642,8 +748,8 @@ goto cmd
 
 
 :cmd
-echo [38;2;0;170;255m┌──(Kali㉿%Dev%-%Acc%)-[~][0m
-set /p "cmd=[38;2;0;200;255m└─$ "[0m
+echo [38;2;0;170;255m┌──(Kali㉿%Dev%-%Acc%)-[~][0m
+set /p "cmd=[38;2;0;200;255m└─$ "[0m
 
 if /i "%cmd%"=="help" (
     echo Available Commands:
@@ -759,23 +865,25 @@ if /i "%cmd%"=="exit" (
 cmd /c "%cmd%"
 echo.
 goto cmd
-  </div>
-</section>
-  
-  <section class="container" id="passgen">
-  <div class="heading-container">
-    <h2>PasswordGenerator.bat</h2>
-    <button class="copy-btn tooltip" onclick="copyCode('passgen-code')">
-      <span class="tooltiptext" id="passgen-tooltip">Copy to clipboard</span>
-      📋 Copy Code
-    </button>
-    <button class="download-btn tooltip" onclick="downloadCode('passgen-code', 'PasswordGenerator.bat')">
-      <span class="tooltiptext" id="passgen-download-tooltip">Download file</span>
-      📥 Download
-    </button>
-  </div>
-  <button class="collapsible">📄 Click to View PasswordGenerator.bat Code</button>
-  <div class="content" id="passgen-code">
+
+      </div>
+    </section>
+
+    <!-- START PasswordGenerator -->
+    <section id="passgen">
+      <div class="heading-container">
+        <h2>PasswordGenerator.bat</h2>
+        <button class="copy-btn tooltip" onclick="copyCode('passgen-code')">
+          <span class="tooltiptext" id="passgen-tooltip">Copy to clipboard</span>
+          📋 Copy Code
+        </button>
+        <button class="download-btn tooltip" onclick="downloadCode('passgen-code', 'PasswordGenerator.bat')">
+          <span class="tooltiptext" id="passgen-download-tooltip">Download file</span>
+          👅 Download
+        </button>
+      </div>
+      <button class="collapsible">📄 Click to View PasswordGenerator.bat Code</button>
+      <div class="content" id="passgen-code">
 @echo off
 setlocal EnableDelayedExpansion
 title Advanced Password Generator - With Length Cap + CMD Output
@@ -885,24 +993,25 @@ echo %filename%
 echo.
 pause
 exit
-  </div>
-</section>
 
-<!-- Add this section after the password generator section and before the footer -->
-<section class="container" id="zipcracker">
-  <div class="heading-container">
-    <h2>Zip Cracker.bat</h2>
-    <button class="copy-btn tooltip" onclick="copyCode('zipcracker-code')">
-      <span class="tooltiptext" id="zipcracker-tooltip">Copy to clipboard</span>
-      📋 Copy Code
-    </button>
-    <button class="download-btn tooltip" onclick="downloadCode('zipcracker-code', 'ZipCracker.bat')">
-      <span class="tooltiptext" id="zipcracker-download-tooltip">Download file</span>
-      📥 Download
-    </button>
-  </div>
-  <button class="collapsible">📄 Click to View ZipCracker.bat Code</button>
-  <div class="content" id="zipcracker-code">
+      </div>
+    </section>
+
+    <!-- START Zip Cracker -->
+    <section id="zipcracker">
+      <div class="heading-container">
+        <h2>Zip Cracker.bat</h2>
+        <button class="copy-btn tooltip" onclick="copyCode('zipcracker-code')">
+          <span class="tooltiptext" id="zipcracker-tooltip">Copy to clipboard</span>
+          📋 Copy Code
+        </button>
+        <button class="download-btn tooltip" onclick="downloadCode('zipcracker-code', 'ZipCracker.bat')">
+          <span class="tooltiptext" id="zipcracker-download-tooltip">Download file</span>
+          👅 Download
+        </button>
+      </div>
+      <button class="collapsible">📄 Click to View ZipCracker.bat Code</button>
+      <div class="content" id="zipcracker-code">
 @echo off
 setlocal enabledelayedexpansion
 
@@ -946,23 +1055,25 @@ if %errorlevel% EQU 0 (
     exit
 )
 exit /b
-  </div>
-</section>
 
-<section class="container" id="guessinggame">
-  <div class="heading-container">
-    <h2>Number Guessing Game.bat</h2>
-    <button class="copy-btn tooltip" onclick="copyCode('guessinggame-code')">
-      <span class="tooltiptext" id="guessinggame-tooltip">Copy to clipboard</span>
-      📋 Copy Code
-    </button>
-    <button class="download-btn tooltip" onclick="downloadCode('guessinggame-code', 'NumberGuessingGame.bat')">
-      <span class="tooltiptext" id="guessinggame-download-tooltip">Download file</span>
-      📥 Download
-    </button>
-  </div>
-  <button class="collapsible">📄 Click to View Number Guessing Game.bat Code</button>
-  <div class="content" id="guessinggame-code">
+      </div>
+    </section>
+
+    <!-- START Number Guessing Game -->
+    <section id="guessinggame">
+      <div class="heading-container">
+        <h2>Number Guessing Game.bat</h2>
+        <button class="copy-btn tooltip" onclick="copyCode('guessinggame-code')">
+          <span class="tooltiptext" id="guessinggame-tooltip">Copy to clipboard</span>
+          📋 Copy Code
+        </button>
+        <button class="download-btn tooltip" onclick="downloadCode('guessinggame-code', 'NumberGuessingGame.bat')">
+          <span class="tooltiptext" id="guessinggame-download-tooltip">Download file</span>
+          👅 Download
+        </button>
+      </div>
+      <button class="collapsible">📄 Click to View Number Guessing Game.bat Code</button>
+      <div class="content" id="guessinggame-code">
 @echo off
 chcp 65001 >nul
 color 0e
@@ -994,24 +1105,51 @@ echo It took you %guessnum% guesses.
 echo.
 pause
 :banner
-echo [38;2;0;255;0m╔════════════════════════════════════════════════════════════╗[0m
-echo [38;2;0;200;0m║               Guessing Game - By Ryan Watson               ║[0m
-echo [38;2;0;150;0m╠════════════════════════════════════════════════════════════╣[0m
+echo [38;2;0;255;0m╔════════════════════════════════════════════════════════════╗[0m
+echo [38;2;0;200;0m║               Guessing Game - By Ryan Watson               ║[0m
+echo [38;2;0;150;0m╠════════════════════════════════════════════════════════════╣[0m
 :: Get the current date and format it
 for /f "tokens=1-4 delims=/ " %%a in ('date /t') do set "weekday=%%a" & set "month=%%b" & set "day=%%c" & set "year=%%d"
-echo [38;2;0;200;0m║                       %weekday% %month%-%day%-%year%                       ║[0m
-echo [38;2;0;255;0m╚════════════════════════════════════════════════════════════╝[0m
+echo [38;2;0;200;0m║                       %weekday% %month%-%day%-%year%                       ║[0m
+echo [38;2;0;255;0m╚════════════════════════════════════════════════════════════╝[0m
 echo.
 exit /b
 pause
+      </div>
+    </section>
+
   </div>
 </section>
 
-  <footer>
-    <p>© 2025 My Site That Shares Source Code</p>
-  </footer>
+<footer>
+  <p>© 2025 My Site That Shares Source Code</p>
+</footer>
+
 
   <script>
+  
+  
+  // Function to filter files based on the search bar input
+function filterFiles() {
+  // Get the search query (convert to lowercase for case-insensitive search)
+  const query = document.getElementById('search-input').value.toLowerCase();
+
+  // Get all sections in the grid
+  const sections = document.querySelectorAll('.container-grid section');
+
+  // Loop through each section and check if it matches the query
+  sections.forEach((section) => {
+    const heading = section.querySelector('h2').textContent.toLowerCase(); // Get the text content of the <h2> tag
+
+    if (heading.includes(query)) {
+      // If the heading includes the query, show the section
+      section.style.display = 'block';
+    } else {
+      // Otherwise, hide the section
+      section.style.display = 'none';
+    }
+  });
+}
     let currentTheme = localStorage.getItem('theme') || 'blue';
 
     function changeTheme(theme) {
