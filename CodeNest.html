@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Advanced Web Page</title>
+  <style>
+  
+	.header-logo {
+    height: 70px; /* Adjust the height as needed */
+    vertical-align: middle; /* Align the logo vertically with other header elements */
+}
+ 
+	
+    :root {
+      --bg-color: #e3f2fd; /* Light blue background */
+      --text-color: #0d47a1; /* Dark blue text */
+      --accent-color: #1976d2; /* Blue for accents */
+      --button-bg: #42a5f5; /* Lighter blue button */
+      --button-text-color: white; /* Button text color */
+      --button-hover-bg: #1e88e5; /* Darker blue on hover */
+      --button-active-bg: #1565c0; /* Even darker blue on active */
+    }
+
+    [data-theme="dark"] {
+      --bg-color: #1e3c6c; /* Dark blue background */
+      --text-color: #bbdefb; /* Light blue text */
+      --accent-color: #64b5f6; /* Lighter blue for accents */
+      --button-bg: #2196f3; /* Medium blue button */
+      --button-text-color: black; /* Button text color (dark text for contrast) */
+      --button-hover-bg: #1976d2; /* Darker blue on hover */
+      --button-active-bg: #0d47a1; /* Even darker blue on active */
+    }
+
+    [data-theme="red"] {
+      --bg-color: #b71c1c; /* Dark red background */
+      --text-color: #f8bbd0; /* Light red text */
+      --accent-color: #d32f2f; /* Red accents */
+      --button-bg: #f44336; /* Light red button */
+      --button-text-color: white; /* Button text color */
+      --button-hover-bg: #e53935; /* Darker red on hover */
+      --button-active-bg: #c62828; /* Even darker red on active */
+    }
+
+    [data-theme="light-red"] {
+      --bg-color: #ffcdd2; /* Light red background */
+      --text-color: #c62828; /* Dark red text */
+      --accent-color: #ef5350; /* Light red accents */
+      --button-bg: #f44336; /* Light red button */
+      --button-text-color: black; /* Button text color (dark text for contrast) */
+      --button-hover-bg: #e53935; /* Darker red on hover */
+      --button-active-bg: #d32f2f; /* Even darker red on active */
+    }
+
+    [data-theme="light-blue"] {
+      --bg-color: #e3f2fd; /* Light blue background */
+      --text-color: #0d47a1; /* Dark blue text */
+      --accent-color: #42a5f5; /* Light blue accents */
+      --button-bg: #42a5f5; /* Lighter blue button */
+      --button-text-color: black; /* Button text color */
+      --button-hover-bg: #1e88e5; /* Darker blue on hover */
+      --button-active-bg: #1565c0; /* Even darker blue on active */
+    }
+
+    /* Black theme (dark mode) */
+    [data-theme="black"] {
+      --bg-color: #121212; /* Dark black background */
+      --text-color: #e0e0e0; /* Light gray text */
+      --accent-color: #424242; /* Dark gray for accents */
+      --button-bg: #616161; /* Medium gray button */
+      --button-text-color: white; /* Button text color */
+      --button-hover-bg: #757575; /* Lighter gray on hover */
+      --button-active-bg: #9e9e9e; /* Even lighter gray on active */
+    }
+
+    /* Light Black theme (gray) */
+    [data-theme="light-black"] {
+      --bg-color: #424242; /* Dark gray background */
+      --text-color: #f5f5f5; /* Very light gray text */
+      --accent-color: #616161; /* Medium gray for accents */
+      --button-bg: #9e9e9e; /* Light gray button */
+      --button-text-color: black; /* Button text color */
+      --button-hover-bg: #bdbdbd; /* Lighter gray on hover */
+      --button-active-bg: #e0e0e0; /* Even lighter gray on active */
+    }
+
+    /* White theme */
+    [data-theme="white"] {
+      --bg-color: #ffffff; /* Pure white background */
+      --text-color: #212121; /* Very dark gray text */
+      --accent-color: #e0e0e0; /* Light gray for accents */
+      --button-bg: #f5f5f5; /* Off-white button */
+      --button-text-color: black; /* Button text color */
+      --button-hover-bg: #e0e0e0; /* Light gray on hover */
+      --button-active-bg: #bdbdbd; /* Medium gray on active */
+    }
+
+    /* Light White theme (off-white) */
+    [data-theme="light-white"] {
+      --bg-color: #f5f5f5; /* Off-white background */
+      --text-color: #424242; /* Dark gray text */
+      --accent-color: #e0e0e0; /* Light gray for accents */
+      --button-bg: #eeeeee; /* Very light gray button */
+      --button-text-color: black; /* Button text color */
+      --button-hover-bg: #e0e0e0; /* Light gray on hover */
+      --button-active-bg: #bdbdbd; /* Medium gray on active */
+    }
+
+    /* Fix submenu text color */
+    [data-theme="dark"] .dropdown-menu a,
+    [data-theme="red"] .dropdown-menu a,
+    [data-theme="light-red"] .dropdown-menu a,
+    [data-theme="blue"] .dropdown-menu a,
+    [data-theme="black"] .dropdown-menu a,
+    [data-theme="light-black"] .dropdown-menu a,
+    [data-theme="white"] .dropdown-menu a,
+    [data-theme="light-white"] .dropdown-menu a {
+      color: var(--text-color) !important; /* Ensure the text color is the theme's main color */
+    }
+
+    [data-theme="dark"] .dropdown-menu a:hover,
+    [data-theme="red"] .dropdown-menu a:hover,
+    [data-theme="light-red"] .dropdown-menu a:hover,
+    [data-theme="blue"] .dropdown-menu a:hover,
+    [data-theme="black"] .dropdown-menu a:hover,
+    [data-theme="light-black"] .dropdown-menu a:hover,
+    [data-theme="white"] .dropdown-menu a:hover,
+    [data-theme="light-white"] .dropdown-menu a:hover {
+      color: white !important; /* Make sure the text turns white when hovering */
+    }
+
+    /* Fix Blue submenu buttons' text color */
+    #blue-submenu a {
+      color: #0d47a1 !important; /* Dark blue color for better visibility */
+    }
+
+    #blue-submenu a:hover {
+      background-color: var(--button-hover-bg);
+      color: white !important; /* White text on hover for contrast */
+    }
+
+    /* Fix Red submenu buttons' text color */
+    #red-submenu a {
+      color: #b71c1c !important; /* Dark red color for better visibility */
+    }
+
+    #red-submenu a:hover {
+      background-color: #e53935; /* Darker red background on hover */
+      color: white !important; /* White text on hover for contrast */
+    }
+
+    /* Fix Black submenu buttons' text color */
+    #black-submenu a {
+      color: #212121 !important; /* Dark color for better visibility */
+    }
+
+    #black-submenu a:hover {
+      background-color: #616161; /* Dark gray background on hover */
+      color: white !important; /* White text on hover for contrast */
+    }
+
+    /* Fix White submenu buttons' text color */
+    #white-submenu a {
+      color: #757575 !important; /* Medium gray color for better visibility */
+    }
+
+    #white-submenu a:hover {
+      background-color: #e0e0e0; /* Light gray background on hover */
+      color: #212121 !important; /* Dark text on hover for contrast */
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+      transition: all 0.3s ease;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+    }
+
+    header {
+      background: var(--accent-color);
+      color: white;
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+    }
+
+    .container {
+      padding: 2rem;
+    }
+
+    .theme-toggle-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .toggle-theme {
+      background: var(--button-bg);
+      border: 2px solid var(--accent-color);
+      padding: 0.75rem 2rem;
+      border-radius: 50px;
+      color: var(--button-text-color); /* Button text color dynamically changes */
+      font-weight: bold;
+      font-size: 1rem;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .toggle-theme:hover {
+      background: var(--button-hover-bg);
+      transform: scale(1.05);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    .toggle-theme:active {
+      background: var(--button-active-bg);
+      transform: scale(0.98);
+    }
+
+    .toggle-theme:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(85, 137, 255, 0.5);
+    }
+
+    .dropdown-menu {
+      display: none;
+      background-color: white;
+      position: absolute;
+      top: 100%;
+      left: 10%; /* Shift the submenu to the right of the button */
+      margin-top: 10px;
+      margin-left: 10px; /* Add a small margin to create space */
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 10px;
+      transition: all 0.3s ease-in-out;
+      z-index: 999;
+      width: 140px; /* Adjusted width for submenu */
+      max-width: 100%;
+      overflow: hidden;
+    }
+
+    .dropdown-submenu {
+      display: none;
+      position: absolute;
+      left: 10%; /* Adjust the submenu to appear directly to the right of the parent menu */
+      top: 550%;
+      margin-left: 10px; /* Add some space between the button and the submenu */
+      background-color: #f5f5f5;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 10px;
+      z-index: 1000;
+      width: 140px; /* You can adjust the width of the submenu */
+      max-width: 100%;
+      overflow: hidden;
+    }
+
+    .dropdown-menu a {
+      color: var(--text-color); /* Set text color to match the theme's text color */
+      text-decoration: none;
+      display: block;
+      padding: 8px;
+      margin: 4px 0;
+      border-radius: 4px;
+    }
+
+    .dropdown-menu a:hover {
+      background-color: var(--button-hover-bg); /* Hover color */
+      color: white; /* Ensure text turns white on hover */
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      margin-top: 4rem;
+      color: var(--text-color);
+    }
+
+    .collapsible {
+      background: var(--button-bg);
+      color: white;
+      cursor: pointer;
+      padding: 1.5rem 2rem;
+      width: 25%;
+      border: none;
+      text-align: center;
+      outline: none;
+      font-size: 1.5rem;
+      border-radius: 10px;
+      margin-top: 1rem;
+      min-width: 160px;
+      height: 160px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .collapsible:hover {
+      background: var(--button-hover-bg);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .collapsible:active {
+      background: var(--button-active-bg);
+      transform: translateY(2px);
+    }
+
+    .collapsible .active {
+      background-color: var(--button-hover-bg);
+    }
+
+    .content {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height 0.7s ease, opacity 0.7s ease;
+      background-color: #fff;
+      margin-top: 0.5rem;
+      padding: 0 1rem;
+      font-family: Consolas, monospace;
+      font-size: 0.9rem;
+      color: #222;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border: 2px solid #ccc;
+      text-align: left;
+      white-space: pre-wrap;
+      pointer-events: none;
+    }
+
+    .content.show {
+      max-height: 500px; /* Or use scrollHeight dynamically with JS */
+      opacity: 1;
+      padding: 1rem;
+      pointer-events: auto;
+    }
+
+    [data-theme="dark"] .content {
+      background-color: #1e1e1e;
+      color: #e0e0e0;
+      border-color: #444;
+    }
+    
+    [data-theme="black"] .content {
+      background-color: #121212;
+      color: #e0e0e0;
+      border-color: #444;
+    }
+
+    /* Copy button styles */
+    .heading-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .copy-btn {
+      background: var(--button-bg);
+      color: var(--button-text-color);
+      border: none;
+      border-radius: 4px;
+      padding: 5px 10px;
+      cursor: pointer;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      transition: all 0.2s ease;
+    }
+
+    .copy-btn:hover {
+      background: var(--button-hover-bg);
+      transform: translateY(-2px);
+    }
+
+    .copy-btn:active {
+      transform: translateY(1px);
+    }
+	
+	/* Download button styles - ADD THIS SECTION */
+.download-btn {
+  background: var(--button-bg);
+  color: var(--button-text-color);
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+  transition: all 0.2s ease;
+}
+
+.download-btn:hover {
+  background: var(--button-hover-bg);
+  transform: translateY(-2px);
+}
+
+.download-btn:active {
+  transform: translateY(1px);
+}
+/* End of download button styles */
+
+    /* Tooltip styling */
+    .tooltip {
+      position: relative;
+      display: inline-block;
+    }
+
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 100px;
+      background-color: #555;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 5px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      left: 50%;
+      margin-left: -50px;
+      opacity: 0;
+      transition: opacity 0.3s;
+      font-size: 12px;
+    }
+
+    .tooltip .tooltiptext.show {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <div>
+            <a href="/"> <img src="logo-transparent-png.png" alt="Your Logo" class="header-logo">
+            </a>
+        </div>
+		<div>
+			
+        <div class="theme-toggle-container">
+          <button class="toggle-theme" onclick="toggleDropdown()">Change Theme</button>
+          <div id="theme-dropdown" class="dropdown-menu">
+            <a href="#" onclick="toggleSubmenu('blue')">Blue Themes</a>
+            <a href="#" onclick="toggleSubmenu('red')">Red Themes</a>
+            <a href="#" onclick="toggleSubmenu('black')">Black Themes</a>
+            <a href="#" onclick="toggleSubmenu('white')">White Themes</a>
+          </div>
+          <div id="blue-submenu" class="dropdown-submenu">
+            <a href="#" onclick="changeTheme('light-blue')">Light Blue</a>
+            <a href="#" onclick="changeTheme('dark')">Dark Blue</a>
+          </div>
+          <div id="red-submenu" class="dropdown-submenu">
+            <a href="#" onclick="changeTheme('light-red')">Light Red</a>
+            <a href="#" onclick="changeTheme('red')">Dark Red</a>
+          </div>
+          <div id="black-submenu" class="dropdown-submenu">
+            <a href="#" onclick="changeTheme('black')">Dark Black</a>
+            <a href="#" onclick="changeTheme('light-black')">Gray</a>
+          </div>
+          <div id="white-submenu" class="dropdown-submenu">
+            <a href="#" onclick="changeTheme('light-white')">Off-White</a>
+            <a href="#" onclick="changeTheme('white')">Pure White</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <section class="container" id="home">
+    <h1>Welcome!</h1>
+    <p>Here You Can Look Around For Some Fun Files, You Might Find Something To Play With Here Too</p>
+  </section>
+
+  <section class="container" id="autotyper">
+  <div class="heading-container">
+    <h2>AutoTyper.bat</h2>
+    <button class="copy-btn tooltip" onclick="copyCode('autotyper-code')">
+      <span class="tooltiptext" id="autotyper-tooltip">Copy to clipboard</span>
+      📋 Copy Code
+    </button>
+    <button class="download-btn tooltip" onclick="downloadCode('autotyper-code', 'AutoTyper.bat')">
+      <span class="tooltiptext" id="autotyper-download-tooltip">Download file</span>
+      📥 Download
+    </button>
+  </div>
+  <button class="collapsible">📄 Click to View AutoTyper.bat Code</button>
+  <div class="content" id="autotyper-code">
+@echo off
+chcp 65001 >nul
+title 🚀 Auto Typer - By Ryan Watson
+mode con cols=80 lines=25
+
+setlocal EnableDelayedExpansion
+set "SPACE="
+
+:logo
+cls
+call :banner
+echo.
+
+set /p "msg=   Message to type: "
+set /p "count=   How many times to type it: "
+set /p "delay=   Delay before start (seconds): "
+set /p "enter=   Press ENTER after each message? (Y/N): "
+
+:: Check if ENTER should be added
+set "useEnter="
+if /i "%enter%"=="Y" set "useEnter={ENTER}"
+
+:: Countdown
+cls
+call :banner
+echo.
+echo %SPACE:~0,20%Preparing to start...
+echo.
+for /l %%i in (%delay%,-1,1) do (
+    set "dots="
+    for /l %%j in (1,1,%%i) do set "dots=!dots!."
+    cls
+    call :banner
+    echo.
+    echo %SPACE:~0,20%Preparing to start...
+    echo.
+    echo %SPACE:~0,20%Starting in %%i seconds! !dots!
+    timeout /t 1 >nul
+)
+
+:: Calculate number of times to copy the phrase
+set /a copyCount=%count%/2
+
+:: Typing Phase
+cls
+call :banner
+echo.
+echo %SPACE:~0,20%Typing "!msg!" %count% times...
+echo.
+
+:: If even, copy the message for faster pasting
+if %count% lss 2 (
+    echo !msg! | clip
+)
+
+:: For even numbers, copy the phrase `copyCount` times before typing
+for /l %%i in (1,1,%copyCount%) do (
+    echo !msg! | clip
+)
+
+:: Typing logic for pasting the copied phrase
+for /l %%i in (1,1,%count%) do (
+    set /a progress=%%i*50/%count%
+    set /a percent=%%i*100/%count%
+    set "bar=["
+
+    for /l %%j in (1,1,!progress!) do set "bar=!bar!#"
+    for /l %%j in (!progress!,1,50) do set "bar=!bar!-"
+    set "bar=!bar!]"
+
+    cls
+    call :banner
+    echo.
+    echo %SPACE:~0,20%Typing "!msg!"
+    echo %SPACE:~0,20%!bar! %%i/%count% !percent!%% Complete
+    echo.
+
+    powershell -command "Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.SendKeys]::SendWait('^v'); [System.Windows.Forms.SendKeys]::SendWait('%useEnter%')"
+)
+
+:: Finish Message
+echo.
+echo %SPACE:~0,20%✅ All done! Sent %count% message(s).
+echo.
+pause >nul
+exit
+
+:banner
+:: Simple cross-format date parsing
+for /f "tokens=1-3 delims=/-. " %%a in ("%date%") do (
+    set "month=%%a"
+    set "day=%%b"
+    set "year=%%c"
+)
+
+echo [38;2;0;255;0m╔════════════════════════════════════════════════════════════════════════════╗[0m
+echo [38;2;0;200;0m║                        Auto Typer - By Ryan Watson                         ║[0m
+echo [38;2;0;150;0m╠════════════════════════════════════════════════════════════════════════════╣[0m
+echo [38;2;0;200;0m║                          %month%-%day%-%year%                                         ║[0m
+echo [38;2;0;255;0m╚════════════════════════════════════════════════════════════════════════════╝[0m
+echo.
+  </div>
+</section>
+  
+<section class="container" id="customcmd">
+  <div class="heading-container">
+    <h2>CustomCMD.bat</h2>
+    <button class="copy-btn tooltip" onclick="copyCode('customcmd-code')">
+      <span class="tooltiptext" id="customcmd-tooltip">Copy to clipboard</span>
+      📋 Copy Code
+    </button>
+    <button class="download-btn tooltip" onclick="downloadCode('customcmd-code', 'CustomCMD.bat')">
+      <span class="tooltiptext" id="customcmd-download-tooltip">Download file</span>
+      📥 Download
+    </button>
+  </div>
+  <button class="collapsible">📄 Click to View CustomCMD.bat Code</button>
+  <div class="content" id="customcmd-code">
+@echo off
+cls
+title Batchcc
+color 0a
+chcp 65001 >nul
+set "VERSION=1.0"
+set "Dev=Kali"
+set "Acc=%USERNAME%"
+goto cmd
+
+
+:cmd
+echo [38;2;0;170;255m┌──(Kali㉿%Dev%-%Acc%)-[~][0m
+set /p "cmd=[38;2;0;200;255m└─$ "[0m
+
+if /i "%cmd%"=="help" (
+    echo Available Commands:
+    echo -------------------
+    echo help       - Show this menu
+    echo hello      - Greets the user
+    echo date       - Display current date
+    echo time       - Display current time
+    echo sysinfo    - Display system info
+    echo netstat    - Display network stats
+    echo calc       - Launch Windows Calculator
+    echo clear      - Clear the screen
+    echo exit       - Exit the prompt
+	echo cc         - Alias For Clear
+	echo ip         - Show your local IP address
+	echo tasks      - Shows Running Tasks
+	echo ver        - Displays Version
+	echo rickroll   - Be Very Careful With This One
+	echo about      - Tells About The Tool
+    echo.
+    goto cmd
+)
+
+if /i "%cmd%"=="hello" (
+    echo Hello, user!
+    echo.
+    goto cmd
+)
+if /i "%cmd%"=="date" (
+    echo %DATE%
+    echo.
+    goto cmd
+)
+if /i "%cmd%"=="time" (
+    echo %TIME%
+    echo.
+    goto cmd
+)
+if /i "%cmd%"=="sysinfo" (
+    systeminfo
+    echo.
+    goto cmd
+)
+if /i "%cmd%"=="netstat" (
+    netstat -an
+    echo.
+    goto cmd
+)
+if /i "%cmd%"=="calc" (
+    start calc
+    echo.
+    goto cmd
+)
+if /i "%cmd%"=="clear" (
+    cls
+    goto cmd
+)
+
+if /i "%cmd%"=="cc" (
+    cls
+    goto cmd
+)
+
+if /i "%cmd%"=="ip" (
+    ipconfig
+    goto cmd
+)
+
+if /i "%cmd%"=="tasks" (
+    tasklist
+    goto cmd
+)
+
+if /i "%cmd%"=="ver" (
+    echo Custom Cmd Version: %VERSION%
+    echo.
+    goto cmd
+)
+
+if /i "%cmd%"=="rickroll" (
+    start https://www.youtube.com/watch?v=dQw4w9WgXcQ
+    echo.
+    goto cmd
+)
+
+if /i "%cmd%"=="about" (
+    echo Custom CMD Tool v1.0
+    echo Created by Ryan Watson
+    echo This tool was built to provide fun and useful CMD shortcuts.
+    echo.
+    goto cmd
+)
+
+if /i "%cmd%"=="devmode /on" (
+    set "Dev=Developer[~]Mode"
+	set "Acc=%USERNAME%"
+    goto cmd
+)
+
+if /i "%cmd%"=="devmode /off" (
+    set "Dev=Kali"
+	set "Acc=%USERNAME%"
+    goto cmd
+)
+
+if /i "%cmd%"=="exit" (
+    exit
+)
+
+
+
+:: Execute the entered command
+cmd /c "%cmd%"
+echo.
+goto cmd
+  </div>
+</section>
+  
+  <section class="container" id="passgen">
+  <div class="heading-container">
+    <h2>PasswordGenerator.bat</h2>
+    <button class="copy-btn tooltip" onclick="copyCode('passgen-code')">
+      <span class="tooltiptext" id="passgen-tooltip">Copy to clipboard</span>
+      📋 Copy Code
+    </button>
+    <button class="download-btn tooltip" onclick="downloadCode('passgen-code', 'PasswordGenerator.bat')">
+      <span class="tooltiptext" id="passgen-download-tooltip">Download file</span>
+      📥 Download
+    </button>
+  </div>
+  <button class="collapsible">📄 Click to View PasswordGenerator.bat Code</button>
+  <div class="content" id="passgen-code">
+@echo off
+setlocal EnableDelayedExpansion
+title Advanced Password Generator - With Length Cap + CMD Output
+
+:: Set output directory
+set "outputDir=D:\Everything Else\Coding Things\Random Batch Files\Generated Passwords"
+if not exist "%outputDir%" (
+    echo Creating output directory...
+    mkdir "%outputDir%"
+)
+
+:: Ask for password
+set /p "userPass=Enter a password you use often: "
+echo.
+
+:: Ask about character cap
+set "maxLen=0"
+set /p "useCap=Would you like a cap on how many characters the passwords can be? (yes/no): "
+if /i "%useCap%"=="yes" (
+    set /p "maxLen=Enter maximum character length: "
+    echo Cap set to %maxLen% characters.
+) else (
+    echo No cap will be used.
+)
+echo.
+
+:: Get date and time
+for /f "tokens=1-4 delims=/ " %%a in ("%date%") do (
+    set "mm=%%a"
+    set "dd=%%b"
+    set "yyyy=%%c"
+)
+set "timeNow=%time:~0,8%"
+set "timestamp=%mm%/%dd%/%yyyy% at %timeNow%"
+
+:: Set base and output file
+set "base=%userPass%"
+set "filename=%outputDir%\%base%.txt"
+
+:: Start file with header
+(
+    echo Generated Password Variants for "%base%"
+    echo ------------------------------------------
+    echo Generated on: %timestamp%
+    if not "%maxLen%"=="0" echo Max Length: %maxLen%
+    echo.
+) > "%filename%"
+
+:: Transform base password
+set "varBase=%base%"
+set "varBase=!varBase:a=@!"
+set "varBase=!varBase:A=@!"
+set "varBase=!varBase:e=3!"
+set "varBase=!varBase:E=3!"
+set "varBase:i=1"
+set "varBase=!varBase:I=1!"
+set "varBase:o=0!"
+set "varBase:O=0!"
+set "varBase:s=$!"
+set "varBase:S=$!"
+
+:: Output to console
+echo --- Generated Password Variants ---
+echo.
+
+:: Create a list to track generated passwords and avoid duplicates
+set "passwordsGenerated="
+
+:: Generate and show/save 50 variants (Increase the number here)
+for /L %%i in (1,1,50) do (
+    set "variant=!varBase!"
+
+    :: Random mix of additions
+    set /a randType=%%i %% 6
+    if !randType! EQU 0 set "variant=123!variant!"
+    if !randType! EQU 1 set "variant=!variant!@!"
+    if !randType! EQU 2 set "variant=$!variant!$"
+    if !randType! EQU 3 set "variant=!variant!#2025"
+    if !randType! EQU 4 set "variant=!variant!!random:~0,2!"
+    if !randType! EQU 5 set "variant=!variant!_%random:~0,1%%random:~1,1%"
+
+    :: Apply character cap if set
+    if not "%maxLen%"=="0" (
+        set "variant=!variant:~0,%maxLen%!"
+    )
+
+    :: Check if the password is a duplicate
+    set "isDuplicate=false"
+    for %%p in (!passwordsGenerated!) do (
+        if "!variant!"=="%%p" (
+            set "isDuplicate=true"
+        )
+    )
+
+    :: If it's not a duplicate, add to the list and save it
+    if !isDuplicate! == false (
+        echo !variant!
+        echo !variant! >> "%filename%"
+        set "passwordsGenerated=!passwordsGenerated! !variant!"
+    )
+)
+
+:: Confirmation
+echo.
+echo Passwords saved to:
+echo %filename%
+echo.
+pause
+exit
+  </div>
+</section>
+
+<!-- Add this section after the password generator section and before the footer -->
+<section class="container" id="zipcracker">
+  <div class="heading-container">
+    <h2>Zip Cracker.bat</h2>
+    <button class="copy-btn tooltip" onclick="copyCode('zipcracker-code')">
+      <span class="tooltiptext" id="zipcracker-tooltip">Copy to clipboard</span>
+      📋 Copy Code
+    </button>
+    <button class="download-btn tooltip" onclick="downloadCode('zipcracker-code', 'ZipCracker.bat')">
+      <span class="tooltiptext" id="zipcracker-download-tooltip">Download file</span>
+      📥 Download
+    </button>
+  </div>
+  <button class="collapsible">📄 Click to View ZipCracker.bat Code</button>
+  <div class="content" id="zipcracker-code">
+@echo off
+setlocal enabledelayedexpansion
+
+if not exist "C:\Program Files\7-Zip\7z.exe" (
+    echo 7-Zip not installed!
+    pause
+    exit
+)
+
+set /p archive="Enter Archive: "
+if not exist "%archive%" (
+    echo Archive Not Found!
+    pause
+    exit
+)
+
+set /p wordlist="Enter Wordlist: "
+if not exist "%wordlist%" (
+    echo Wordlist Not Found!
+    pause
+    exit
+)
+
+set attemptCount=0
+
+for /F %%a in (%wordlist%) do (
+    set /a attemptCount+=1
+    echo {Attempt} {!attemptCount!}: Trying password: %%a
+    call :attempt %%a
+)
+
+echo Password Not Found In The Word List
+pause
+exit
+
+:attempt
+"C:\Program Files\7-Zip\7z.exe" x -p%1 "%archive%" -o"cracked" -y >nul 2>nul
+if %errorlevel% EQU 0 (
+    echo 🔓Password Found🔓: %1
+    pause
+    exit
+)
+exit /b
+  </div>
+</section>
+
+<section class="container" id="guessinggame">
+  <div class="heading-container">
+    <h2>Number Guessing Game.bat</h2>
+    <button class="copy-btn tooltip" onclick="copyCode('guessinggame-code')">
+      <span class="tooltiptext" id="guessinggame-tooltip">Copy to clipboard</span>
+      📋 Copy Code
+    </button>
+    <button class="download-btn tooltip" onclick="downloadCode('guessinggame-code', 'NumberGuessingGame.bat')">
+      <span class="tooltiptext" id="guessinggame-download-tooltip">Download file</span>
+      📥 Download
+    </button>
+  </div>
+  <button class="collapsible">📄 Click to View Number Guessing Game.bat Code</button>
+  <div class="content" id="guessinggame-code">
+@echo off
+chcp 65001 >nul
+color 0e
+call :banner
+title Guessing Game 
+set /a guessnum=0
+set /a answer=%RANDOM%
+set variable1=hacks08
+echo ------------------------------------------------------------
+echo Welcome to the Guessing Game!
+echo.
+echo Try and Guess my Number!
+echo ------------------------------------------------------------ 
+echo.
+:top 
+echo.
+set /p guess=
+echo.
+if %guess% GTR %answer% ECHO Lower!
+if %guess% LSS %answer% ECHO Higher!
+if %guess%==%answer% GOTO EQUAL
+set /a guessnum=%guessnum% +1
+if %guess%==%variable1% ECHO Found the backdoor hey?, the answer is: %answer% \
+goto top
+:equal
+echo Congratulations, You guessed right!!!
+echo.
+echo It took you %guessnum% guesses.
+echo.
+pause
+:banner
+echo [38;2;0;255;0m╔════════════════════════════════════════════════════════════╗[0m
+echo [38;2;0;200;0m║               Guessing Game - By Ryan Watson               ║[0m
+echo [38;2;0;150;0m╠════════════════════════════════════════════════════════════╣[0m
+:: Get the current date and format it
+for /f "tokens=1-4 delims=/ " %%a in ('date /t') do set "weekday=%%a" & set "month=%%b" & set "day=%%c" & set "year=%%d"
+echo [38;2;0;200;0m║                       %weekday% %month%-%day%-%year%                       ║[0m
+echo [38;2;0;255;0m╚════════════════════════════════════════════════════════════╝[0m
+echo.
+exit /b
+pause
+  </div>
+</section>
+
+  <footer>
+    <p>© 2025 My Site That Shares Source Code</p>
+  </footer>
+
+  <script>
+    let currentTheme = localStorage.getItem('theme') || 'blue';
+
+    function changeTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      currentTheme = theme;
+      localStorage.setItem('theme', theme);
+      closeSubmenu();
+    }
+
+    function toggleSubmenu(theme) {
+      let blueSubmenu = document.getElementById('blue-submenu');
+      let redSubmenu = document.getElementById('red-submenu');
+      let blackSubmenu = document.getElementById('black-submenu');
+      let whiteSubmenu = document.getElementById('white-submenu');
+      
+      // Close all submenus first
+      blueSubmenu.style.display = 'none';
+      redSubmenu.style.display = 'none';
+      blackSubmenu.style.display = 'none';
+      whiteSubmenu.style.display = 'none';
+      
+      // Then open the selected one
+      if (theme === 'blue') {
+        blueSubmenu.style.display = 'block';
+      } else if (theme === 'red') {
+        redSubmenu.style.display = 'block';
+      } else if (theme === 'black') {
+        blackSubmenu.style.display = 'block';
+      } else if (theme === 'white') {
+        whiteSubmenu.style.display = 'block';
+      }
+    }
+
+    function closeSubmenu() {
+      document.getElementById('blue-submenu').style.display = 'none';
+      document.getElementById('red-submenu').style.display = 'none';
+      document.getElementById('black-submenu').style.display = 'none';
+      document.getElementById('white-submenu').style.display = 'none';
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.documentElement.setAttribute('data-theme', currentTheme);
+    });
+
+    function toggleDropdown() {
+      const dropdown = document.getElementById('theme-dropdown');
+      dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+      
+      // Close submenus when closing the main dropdown
+      if (dropdown.style.display === 'none') {
+        closeSubmenu();
+      }
+    }
+    
+    // Collapsible functionality for the code sections
+    document.querySelectorAll('.collapsible').forEach(button => {
+      const content = button.nextElementSibling;
+
+      // Add click event listener to each collapsible
+      button.addEventListener('click', () => {
+        // Check if the content is already open
+        if (content.classList.contains('show')) {
+          // Collapse the content
+          content.style.maxHeight = null;
+          content.style.opacity = '0';
+          content.classList.remove('show');
+        } else {
+          // Close any other open collapsibles
+          document.querySelectorAll('.content.show').forEach(openContent => {
+            openContent.style.maxHeight = null;
+            openContent.style.opacity = '0';
+            openContent.classList.remove('show');
+          });
+
+          // Expand the clicked collapsible
+          content.style.maxHeight = `${content.scrollHeight}px`;
+          content.style.opacity = '1';
+          content.classList.add('show');
+        }
+      });
+    });
+
+    // Function to copy code to clipboard
+    function copyCode(elementId) {
+  const codeElement = document.getElementById(elementId);
+  const code = codeElement.textContent;
+  
+  // Copy to clipboard
+  navigator.clipboard.writeText(code).then(() => {
+    // Show tooltip - fixed to handle all three tooltips
+    let tooltipId;
+    if (elementId === 'autotyper-code') {
+  tooltipId = 'autotyper-tooltip';
+} else if (elementId === 'customcmd-code') {
+  tooltipId = 'customcmd-tooltip';
+} else if (elementId === 'passgen-code') {
+  tooltipId = 'passgen-tooltip';
+} else if (elementId === 'zipcracker-code') {
+  tooltipId = 'zipcracker-tooltip';
+} else if (elementId === 'guessinggame-code') {
+  tooltipId = 'guessinggame-tooltip';
+}
+    
+    const tooltip = document.getElementById(tooltipId);
+    tooltip.textContent = "Copied!";
+    tooltip.classList.add('show');
+    
+    // Hide tooltip after 2 seconds
+    setTimeout(() => {
+      tooltip.classList.remove('show');
+      setTimeout(() => {
+        tooltip.textContent = "Copy to clipboard";
+      }, 300);
+    }, 2000);
+  }).catch(err => {
+    console.error('Could not copy text: ', err);
+  });
+}
+function downloadCode(elementId, filename) {
+  const codeElement = document.getElementById(elementId);
+  const code = codeElement.textContent;
+  
+  // Create a Blob with the code content
+  const blob = new Blob([code], { type: 'text/plain' });
+  
+  // Create a URL for the Blob
+  const url = URL.createObjectURL(blob);
+  
+  // Create a temporary anchor element for downloading
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  
+  // Append to body, click to download, then remove
+  document.body.appendChild(a);
+  a.click();
+  
+  // Clean up
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  
+  // Show tooltip feedback
+  let tooltipId;
+  if (elementId === 'autotyper-code') {
+  tooltipId = 'autotyper-download-tooltip';
+} else if (elementId === 'customcmd-code') {
+  tooltipId = 'customcmd-download-tooltip';
+} else if (elementId === 'passgen-code') {
+  tooltipId = 'passgen-download-tooltip';
+} else if (elementId === 'zipcracker-code') {
+  tooltipId = 'zipcracker-download-tooltip';
+} else if (elementId === 'guessinggame-code') {
+  tooltipId = 'guessinggame-download-tooltip';
+}
+
+  
+  const tooltip = document.getElementById(tooltipId);
+  tooltip.textContent = "Downloaded!";
+  tooltip.classList.add('show');
+  
+  // Hide tooltip after 2 seconds
+  setTimeout(() => {
+    tooltip.classList.remove('show');
+    setTimeout(() => {
+      tooltip.textContent = "Download file";
+    }, 300);
+  }, 2000);
+}
+  </script>
+</body>
+</html>
