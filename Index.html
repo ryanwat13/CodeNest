@@ -639,12 +639,88 @@
       visibility: visible;
       opacity: 1;
     }
+	#device-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2000;
+  justify-content: center;
+  align-items: center;
+}
+
+#device-modal-content {
+  background-color: #ffffff;
+  color: #333333;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+#device-modal-content h2 {
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+}
+
+#device-modal-content button {
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  margin: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+#device-modal-content button:hover {
+  background: #0056b3;
+}
+
+/* Mobile-specific styles */
+body.mobile-friendly {
+  font-size: 14px; /* Smaller font size */
+  padding: 10px; /* Reduced padding */
+}
+
+body.mobile-friendly header {
+  font-size: 1.2rem; /* Smaller header font */
+}
+
+body.mobile-friendly .container-grid {
+  grid-template-columns: 1fr; /* Single column layout */
+}
+
+body.mobile-friendly #device-modal-content {
+  width: 95%; /* Slightly wider modal for mobile users */
+}
+
+body.mobile-friendly #device-modal-content button {
+  padding: 8px 16px; /* Smaller buttons */
+  font-size: 0.9rem;
+}
   </style>
 </head>
 <body>
   <header>
     <nav>
       <div>
+	  <div id="device-modal">
+  <div id="device-modal-content">
+    <h2>What Device Are You On?</h2>
+    <button onclick="setDevice('Mobile')">Mobile</button>
+    <button onclick="setDevice('Xbox')">Xbox</button>
+    <button onclick="setDevice('PS')">PS</button>
+    <button onclick="setDevice('PC')">PC</button>
+  </div>
+</div>
             <a href="/"> <img src="logo-transparent-png.png" alt="Your Logo" class="header-logo">
             </a>
         </div>
@@ -1565,6 +1641,37 @@ function filterFiles() {
     }
   });
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Show the modal when the page loads
+  const modal = document.getElementById('device-modal');
+  modal.style.display = 'flex';
+
+  // Disable scrolling while modal is open
+  document.body.style.overflow = 'hidden';
+});
+
+function setDevice(device) {
+  console.log(`User selected device: ${device}`);
+
+  // Hide the modal
+  const modal = document.getElementById('device-modal');
+  modal.style.display = 'none';
+
+  // Re-enable scrolling
+  document.body.style.overflow = 'auto';
+
+  // Apply mobile-friendly class if the user selected "Mobile"
+  if (device === 'Mobile') {
+    document.body.classList.add('mobile-friendly');
+  } else {
+    document.body.classList.remove('mobile-friendly');
+  }
+
+  // Optionally, store the selected device in localStorage
+  localStorage.setItem('selectedDevice', device);
+}
+
   </script>
 </body>
 </html>
