@@ -733,20 +733,23 @@ body.mobile-friendly #device-modal-content button {
   #device-modal-content {
     width: 90%; /* Adjust modal width for smaller screens */
 	
+	@media (max-width: 768px) {
+  .container-grid .collapsible {
+    height: 120px !important; /* Make the button taller */
+    padding: 2rem 1rem !important; /* Ensure vertical padding */
+	
 
-<!-- Add this to your existing CSS in the <style> section -->
+/* Mobile-specific styles for the collapsible button */
 @media (max-width: 768px) {
   .collapsible {
-    font-size: 1.2rem; /* Slightly larger text for readability */
-    height: auto; /* Make height dynamic */
-    min-height: 120px; /* Set minimum height to make it taller */
-    padding: 15px; /* Add more padding */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    line-height: 1.4;
-    white-space: normal; /* Allow text to wrap */
-    text-align: center;
+    font-size: 1.2rem !important; /* Ensure larger text for readability */
+    height: 120px !important; /* Explicitly set a taller height */
+    padding: 2rem 1rem !important; /* Add vertical padding */
+    text-align: center !important; /* Center-align the text */
+    display: flex !important; /* Flexbox for vertical alignment */
+    align-items: center !important; /* Ensure vertical centering */
+    justify-content: center !important; /* Ensure horizontal centering */
+    line-height: 1.5 !important; /* Adjust line height */
   }
 }
 
