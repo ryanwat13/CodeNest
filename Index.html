@@ -706,6 +706,34 @@ body.mobile-friendly #device-modal-content button {
   padding: 8px 16px; /* Smaller buttons */
   font-size: 0.9rem;
 }
+
+/* Mobile-specific styles */
+@media (max-width: 768px) {
+  .container-grid {
+    grid-template-columns: 1fr; /* Single column layout for mobile */
+    gap: 1rem; /* Reduce the gap between cards */
+  }
+
+  .tool-card {
+    width: 100%; /* Make cards take the full width of the container */
+    padding: 10px; /* Reduce padding for cards */
+    font-size: 0.9rem; /* Adjust font size for better readability */
+  }
+
+  .collapsible {
+    font-size: 1rem; /* Adjust button size */
+    height: auto; /* Allow the button height to adjust dynamically */
+    padding: 1rem; /* Adjust padding for better touch interaction */
+  }
+
+  .content {
+    font-size: 0.8rem; /* Smaller font size for code content */
+  }
+
+  #device-modal-content {
+    width: 90%; /* Adjust modal width for smaller screens */
+  }
+}
   </style>
 </head>
 <body>
