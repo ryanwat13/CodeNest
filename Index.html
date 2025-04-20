@@ -732,6 +732,15 @@ body.mobile-friendly #device-modal-content button {
 
   #device-modal-content {
     width: 90%; /* Adjust modal width for smaller screens */
+	
+	/* Mobile-specific styles */
+@media (max-width: 768px) {
+  .collapsible {
+    font-size: 1.2rem; /* Slightly larger text for readability on mobile */
+    height: auto; /* Allow height to adjust dynamically */
+    padding: 2rem 1rem; /* Increase vertical padding for a longer button */
+    text-align: center; /* Center-align text */
+    line-height: 1.5; /* Adjust line height to improve readability */
   }
 }
   </style>
