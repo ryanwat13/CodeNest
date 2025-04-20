@@ -2,114 +2,503 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>CodeNest
-  </title>
+  <title>Code Repository | Professional Tools & Resources</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
-  
-  
-  
-.tooltip-container {
-  position: relative;
-  display: block;
-  width: 100%;
+    /* Base Variables & Theme System */
+:root {
+  /* Primary Brand Colors */
+  --primary-color: #2563eb;
+  --primary-dark: #1d4ed8;
+  --primary-light: #60a5fa;
+
+  /* Neutral Colors */
+  --neutral-50: #f8fafc;
+  --neutral-100: #f1f5f9;
+  --neutral-200: #e2e8f0;
+  --neutral-300: #cbd5e1;
+  --neutral-400: #94a3b8;
+  --neutral-500: #64748b;
+  --neutral-600: #475569;
+  --neutral-700: #334155;
+  --neutral-800: #1e293b;
+  --neutral-900: #0f172a;
+
+  /* Accent Colors */
+  --accent-color: #1976d2;
+  --success-color: #10b981;
+  --error-color: #ef4444;
+  --warning-color: #f59e0b;
+
+  /* Default Theme (Light Blue) */
+  --bg-color: #e3f2fd;
+  --text-color: #0d47a1;
+  --button-bg: #42a5f5;
+  --button-text-color: white;
+  --button-hover-bg: #1e88e5;
+  --button-active-bg: #1565c0;
+  --card-bg: white;
+  --border-color: var(--neutral-200);
+
+  /* Typography */
+  --font-heading: 'Montserrat', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  /* Spacing & Layout */
+  --content-width: 1200px;
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
+  --transition-slow: 350ms ease;
+
+  /* Border Radius */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-full: 9999px;
 }
 
-.card-tooltip {
-  visibility: hidden;
-  position: absolute;
-  bottom: 120%;
-  left: 50%;
-  transform: translateX(-50%) translateY(10px);
-  background-color: var(--accent-color);
-  color: var(--text-color);
-  padding: 10px 14px;
+/* Themes */
+[data-theme="dark"] {
+  --bg-color: #1e3c6c;
+  --text-color: #e3f2fd; /* Light Blue BG */
+  --accent-color: #64b5f6;
+  --button-bg: #2196f3;
+  --button-text-color: black;
+  --button-hover-bg: #1976d2;
+  --button-active-bg: #0d47a1;
+  --card-bg: #223e66;
+  --border-color: #335075;
+  /* Dark - Label */
+  --code-bg: #162544;
+  --code-text: #e3f2fd;
+
+}
+
+[data-theme="light-blue"] {
+  --bg-color: #bbe2ff;
+  --text-color: #1e3c6c; /* Dark Blue BG */
+  --accent-color: #42a5f5;
+  --button-bg: #42a5f5;
+  --button-text-color: black;
+  --button-hover-bg: #1e88e5;
+  --button-active-bg: #1565c0;
+  --card-bg: white;
+  --border-color: var(--neutral-200);
+  /* Light Blue - Label */
+  --code-bg: #f1f5ff;
+  --code-text: #1e3c6c;
+
+}
+
+[data-theme="light-red"] {
+  --bg-color: #f36e6e;
+  --text-color: #b71c1c; /* Dark Red BG */
+  --accent-color: #ef5350;
+  --button-bg: #f44336;
+  --button-text-color: black;
+  --button-hover-bg: #e53935;
+  --button-active-bg: #d32f2f;
+  --card-bg: #ffe5e5;
+  --border-color: #f8bdbd;
+  /* Light Red - Label */
+  --code-bg: #ffeaea;
+  --code-text: #b71c1c;
+
+}
+
+[data-theme="red"] {
+  --bg-color: #b71c1c;
+  --text-color: #ffcdd2; /* Light Red BG */
+  --accent-color: #d32f2f;
+  --button-bg: #f44336;
+  --button-text-color: white;
+  --button-hover-bg: #e53935;
+  --button-active-bg: #c62828;
+  --card-bg: #c62828;
+  --border-color: #ef9a9a;
+  /* Dark Red - Label */
+  --code-bg: #5a0a0a;
+  --code-text: #ffcdd2;
+
+}
+
+[data-theme="black"] {
+  --bg-color: #121212;
+  --text-color: #ffffff; /* Pure White BG */
+  --accent-color: #424242;
+  --button-bg: #616161;
+  --button-text-color: white;
+  --button-hover-bg: #757575;
+  --button-active-bg: #9e9e9e;
+  --card-bg: #1e1e1e;
+  --border-color: #333;
+  /* Black - Label */
+  --code-bg: #222222;
+  --code-text: #ffffff;
+
+}
+
+[data-theme="light-black"] {
+  --bg-color: #424242;
+  --text-color: #f5f5f5; /* Off-White BG */
+  --accent-color: #616161;
+  --button-bg: #9e9e9e;
+  --button-text-color: black;
+  --button-hover-bg: #bdbdbd;
+  --button-active-bg: #e0e0e0;
+  --card-bg: #4a4a4a;
+  --border-color: #888;
+  /* Gray - Label */
+  --code-bg: #4d4d4d;
+  --code-text: #f5f5f5;
+
+}
+
+[data-theme="white"] {
+  --bg-color: #ffffff;
+  --text-color: #121212; /* Black BG */
+  --accent-color: #e0e0e0;
+  --button-bg: #f5f5f5;
+  --button-text-color: black;
+  --button-hover-bg: #e0e0e0;
+  --button-active-bg: #bdbdbd;
+  --card-bg: #ffffff;
+  --border-color: #dcdcdc;
+  /* Pure White - Label */
+  --code-bg: #f3f3f3;
+  --code-text: #0f172a;
+
+}
+
+[data-theme="light-white"] {
+  --bg-color: #f5f5f5;
+  --text-color: #424242;
+  --accent-color: #e0e0e0;
+  --button-bg: #eeeeee;
+  --button-text-color: black;
+  --button-hover-bg: #e0e0e0;
+  --button-active-bg: #bdbdbd;
+  --card-bg: #ffffff;
+  --border-color: #cccccc;
+  /* Off-White - Label */
+  --code-bg: #eeeeee;
+  --code-text: #212121;
+
+}
+
+pre, code, .code-box {
+  background-color: var(--code-bg);
+  color: var(--code-text);
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  font-family: 'Fira Code', monospace;
   font-size: 0.95rem;
-  font-weight: 500;
-  border-radius: 10px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-  white-space: nowrap;
-  opacity: 0;
-  z-index: 100;
-  pointer-events: none;
-  transition: all 0.3s ease-in-out;
+  overflow-x: auto;
+  display: block;
 }
 
-.tooltip-container:hover .card-tooltip {
-  visibility: visible;
-  opacity: 1;
-  transform: translateX(-50%) translateY(-10px);
+code {
+  display: inline;
+  padding: 0.2em 0.4em;
+  border-radius: var(--radius-sm);
 }
 
 
-.card-tooltip::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -6px;
-  border-width: 6px;
-  border-style: solid;
-  border-color: var(--accent-color) transparent transparent transparent;
-}
 
-  
-  .suggestions {
-  position: absolute;
-  background: white; /* Can also be set to var(--bg-color) to follow the theme */
-  border: 1px solid var(--accent-color); /* Border matches the theme accent color */
-  border-radius: 20px; /* Circular corners */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  max-height: 200px;
-  overflow-y: auto;
-  width: 100%;
-  z-index: 1000;
+
+      /* Typography */
+      --font-heading: 'Montserrat', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      
+      /* Spacing & Layout */
+      --content-width: 1200px;
+      --spacing-xs: 0.25rem;
+      --spacing-sm: 0.5rem;
+      --spacing-md: 1rem;
+      --spacing-lg: 1.5rem;
+      --spacing-xl: 2rem;
+      --spacing-2xl: 3rem;
+      
+      /* Shadows */
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      
+      /* Transitions */
+      --transition-fast: 150ms ease;
+      --transition-normal: 250ms ease;
+      --transition-slow: 350ms ease;
+      
+      /* Border Radius */
+      --radius-sm: 0.25rem;
+      --radius-md: 0.5rem;
+      --radius-lg: 0.75rem;
+      --radius-xl: 1rem;
+      --radius-full: 9999px;
+    }
+
+    /* Dark Theme */
+    [data-theme="dark"] {
+      --bg-color: var(--neutral-900);
+      --text-color: var(--neutral-100);
+      --card-bg: var(--neutral-800);
+      --border-color: var(--neutral-700);
+    }
+
+    /* Blue Theme */
+    [data-theme="blue"] {
+      --primary-color: #2563eb;
+      --primary-dark: #1d4ed8;
+      --primary-light: #60a5fa;
+      --button-bg: var(--primary-color);
+      --button-hover-bg: var(--primary-dark);
+    }
+
+    /* Red Theme */
+    [data-theme="red"] {
+      --primary-color: #dc2626;
+      --primary-dark: #b91c1c;
+      --primary-light: #f87171;
+      --button-bg: var(--primary-color);
+      --button-hover-bg: var(--primary-dark);
+    }
+
+    /* Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      line-height: 1.6;
+      color: var(--text-color);
+      background-color: var(--bg-color);
+      transition: background-color var(--transition-normal), color var(--transition-normal);
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: var(--spacing-md);
+      color: var(--text-color);
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+    }
+
+    h2 {
+      font-size: 1.75rem;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+    }
+
+    p {
+      margin-bottom: var(--spacing-md);
+    }
+
+    a {
+      color: var(--primary-color);
+      text-decoration: none;
+      transition: color var(--transition-fast);
+    }
+
+    a:hover {
+      color: var(--primary-dark);
+    }
+
+    /* Container */
+    .container {
+      width: 100%;
+      max-width: var(--content-width);
+      margin: 0 auto;
+      padding: 0 var(--spacing-lg);
+    }
+
+    /* Header */
+    header {
+      background-color: var(--card-bg);
+      box-shadow: var(--shadow-md);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid var(--border-color);
+      transition: background-color var(--transition-normal);
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--spacing-md) 0;
+    }
+
+    .header-logo {
+      height: 45px;
+      display: flex;
+      align-items: center;
+    }
+
+    .logo-text {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 1.5rem;
+      margin-left: var(--spacing-sm);
+      color: var(--primary-color);
+    }
+
+    /* Navigation */
+    nav {
+      display: flex;
+      align-items: center;
+    }
+
+    nav .nav-links {
+      display: flex;
+      gap: var(--spacing-lg);
+    }
+
+    nav a {
+      color: var(--text-color);
+      font-weight: 500;
+      font-size: 1rem;
+      transition: color var(--transition-fast);
+      position: relative;
+    }
+
+    nav a:hover {
+      color: var(--primary-color);
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background-color: var(--primary-color);
+      transition: width var(--transition-normal);
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* Utils */
+    .controls {
+      display: flex;
+      gap: var(--spacing-md);
+      align-items: center;
+    }
+
+    /* Theme toggle */
+    .theme-toggle-container {
+      position: relative;
+    }
+
+    .toggle-theme {
+      background-color: var(--button-bg);
+      color: var(--button-text-color);
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-md);
+      font-weight: 500;
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: background-color var(--transition-fast), transform var(--transition-fast);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .toggle-theme:hover {
+      background-color: var(--button-hover-bg);
+      transform: translateY(-2px);
+    }
+
+    .toggle-theme:active {
+      transform: translateY(1px);
+    }
+
+    .dropdown-menu {
   display: none;
-  margin-top: 25px;
-}
-
-.suggestions div {
-  padding: 10px; /* Space inside each suggestion */
-  color: var(--text-color); /* Dynamic text color based on theme */
-  cursor: pointer; /* Pointer cursor for hover effect */
-  font-size: 1rem; /* Adjust font size */
-}
-
-.suggestions div:hover {
-  background: var(--button-hover-bg); /* Dynamic hover background color based on theme */
-  color: var(--button-text-color); /* Dynamic text color for contrast */
-}
-  
-  /* Adjusting the width of the dropdown menu */
-#theme-dropdown {
-  display: none;
+  position: absolute;
+  top: 125%;
+  left: 0;
   background-color: white;
-  position: absolute;
-  top: 100%;
-  left: 10%; /* Shift the submenu to the right of the button */
-  margin-top: 10px;
-  margin-left: 10px; /* Add a small margin to create space */
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   padding: 10px;
-  transition: all 0.3s ease-in-out;
   z-index: 999;
-  width: 160px; /* Increase this value to make the text box wider */
-  max-width: 100%;
-  overflow: hidden;
+  width: 160px;
 }
-  
-  html {
-  font-size: calc(5px + 0.5vw); /* Dynamically scales font size with window width */
+
+.dropdown-menu a {
+  display: block;
+  padding: 8px;
+  color: var(--text-color);
+  text-decoration: none;
+  border-radius: 4px;
 }
- 
-  
-  .theme-search-container {
+
+.dropdown-menu a:hover {
+  background-color: var(--button-hover-bg);
+  color: white;
+}
+
+.dropdown-submenu {
+  display: none;
+  position: absolute;
+  top: 650%;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  z-index: 1000;
+  width: 160px;
+}
+
+
+    [data-theme="dark"] .dropdown-menu a:hover {
+      background-color: var(--neutral-700);
+    }
+
+    
+
+    .theme-search-container {
   display: flex;
-  align-items: center; /* Vertically align items */
-  gap: 20px; /* Space between search bar and button */
+  align-items: center;
+  gap: 20px;
 }
 
 .search-bar {
@@ -119,11 +508,13 @@
 
 .search-bar input {
   padding: 10px;
-  width: 250px; /* Adjust width as needed */
+  width: 250px;
   border: 2px solid var(--accent-color);
   border-radius: 20px 0 0 20px;
   outline: none;
   font-size: 1rem;
+  background-color: var(--card-bg);
+  color: var(--text-color);
 }
 
 .search-bar button {
@@ -141,815 +532,485 @@
   background: var(--button-hover-bg);
 }
 
-.theme-toggle-container {
-  display: flex;
-  align-items: center;
+.search-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  max-width: 300px;
 }
 
-.toggle-theme {
-  padding: 10px 20px;
-  background: var(--button-bg);
-  color: var(--button-text-color);
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background 0.3s ease;
+   .suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: calc(100% - 45px); /* 👈 leaves space for the search button */
+  background-color: var(--card-bg);
+  border-radius: var(--radius-full); /* fully rounded like input */
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border-color);
+  border-top: none;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1000;
+  display: none;
 }
 
-.toggle-theme:hover {
-  background: var(--button-hover-bg);
-}
-  
-	.header-logo {
-    height: 70px; /* Adjust the height as needed */
-    vertical-align: middle; /* Align the logo vertically with other header elements */
-}
- 
- .container-grid {
-  grid-template-columns: 1fr;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Exactly 2 per row */
-  gap: 2rem;
-}
-
-.container-grid section:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease;
-}
-
-
-
-
-
-	
-    :root {
-      --bg-color: #e3f2fd; /* Light blue background */
-      --text-color: #0d47a1; /* Dark blue text */
-      --accent-color: #1976d2; /* Blue for accents */
-      --button-bg: #42a5f5; /* Lighter blue button */
-      --button-text-color: white; /* Button text color */
-      --button-hover-bg: #1e88e5; /* Darker blue on hover */
-      --button-active-bg: #1565c0; /* Even darker blue on active */
-    }
-
-    [data-theme="dark"] {
-      --bg-color: #1e3c6c; /* Dark blue background */
-      --text-color: #bbdefb; /* Light blue text */
-      --accent-color: #64b5f6; /* Lighter blue for accents */
-      --button-bg: #2196f3; /* Medium blue button */
-      --button-text-color: black; /* Button text color (dark text for contrast) */
-      --button-hover-bg: #1976d2; /* Darker blue on hover */
-      --button-active-bg: #0d47a1; /* Even darker blue on active */
-    }
-
-    [data-theme="red"] {
-      --bg-color: #b71c1c; /* Dark red background */
-      --text-color: #f8bbd0; /* Light red text */
-      --accent-color: #d32f2f; /* Red accents */
-      --button-bg: #f44336; /* Light red button */
-      --button-text-color: white; /* Button text color */
-      --button-hover-bg: #e53935; /* Darker red on hover */
-      --button-active-bg: #c62828; /* Even darker red on active */
-    }
-
-    [data-theme="light-red"] {
-      --bg-color: #ffcdd2; /* Light red background */
-      --text-color: #c62828; /* Dark red text */
-      --accent-color: #ef5350; /* Light red accents */
-      --button-bg: #f44336; /* Light red button */
-      --button-text-color: black; /* Button text color (dark text for contrast) */
-      --button-hover-bg: #e53935; /* Darker red on hover */
-      --button-active-bg: #d32f2f; /* Even darker red on active */
-    }
-
-    [data-theme="light-blue"] {
-      --bg-color: #e3f2fd; /* Light blue background */
-      --text-color: #0d47a1; /* Dark blue text */
-      --accent-color: #42a5f5; /* Light blue accents */
-      --button-bg: #42a5f5; /* Lighter blue button */
-      --button-text-color: black; /* Button text color */
-      --button-hover-bg: #1e88e5; /* Darker blue on hover */
-      --button-active-bg: #1565c0; /* Even darker blue on active */
-    }
-
-    /* Black theme (dark mode) */
-    [data-theme="black"] {
-      --bg-color: #121212; /* Dark black background */
-      --text-color: #e0e0e0; /* Light gray text */
-      --accent-color: #424242; /* Dark gray for accents */
-      --button-bg: #616161; /* Medium gray button */
-      --button-text-color: white; /* Button text color */
-      --button-hover-bg: #757575; /* Lighter gray on hover */
-      --button-active-bg: #9e9e9e; /* Even lighter gray on active */
-    }
-
-    /* Light Black theme (gray) */
-    [data-theme="light-black"] {
-      --bg-color: #424242; /* Dark gray background */
-      --text-color: #f5f5f5; /* Very light gray text */
-      --accent-color: #616161; /* Medium gray for accents */
-      --button-bg: #9e9e9e; /* Light gray button */
-      --button-text-color: black; /* Button text color */
-      --button-hover-bg: #bdbdbd; /* Lighter gray on hover */
-      --button-active-bg: #e0e0e0; /* Even lighter gray on active */
-    }
-
-    /* White theme */
-    [data-theme="white"] {
-      --bg-color: #ffffff; /* Pure white background */
-      --text-color: #212121; /* Very dark gray text */
-      --accent-color: #e0e0e0; /* Light gray for accents */
-      --button-bg: #f5f5f5; /* Off-white button */
-      --button-text-color: black; /* Button text color */
-      --button-hover-bg: #e0e0e0; /* Light gray on hover */
-      --button-active-bg: #bdbdbd; /* Medium gray on active */
-    }
-
-    /* Light White theme (off-white) */
-    [data-theme="light-white"] {
-      --bg-color: #f5f5f5; /* Off-white background */
-      --text-color: #424242; /* Dark gray text */
-      --accent-color: #e0e0e0; /* Light gray for accents */
-      --button-bg: #eeeeee; /* Very light gray button */
-      --button-text-color: black; /* Button text color */
-      --button-hover-bg: #e0e0e0; /* Light gray on hover */
-      --button-active-bg: #bdbdbd; /* Medium gray on active */
-    }
-
-    /* Fix submenu text color */
-    [data-theme="dark"] .dropdown-menu a,
-    [data-theme="red"] .dropdown-menu a,
-    [data-theme="light-red"] .dropdown-menu a,
-    [data-theme="blue"] .dropdown-menu a,
-    [data-theme="black"] .dropdown-menu a,
-    [data-theme="light-black"] .dropdown-menu a,
-    [data-theme="white"] .dropdown-menu a,
-    [data-theme="light-white"] .dropdown-menu a {
-      color: var(--text-color) !important; /* Ensure the text color is the theme's main color */
-    }
-
-    [data-theme="dark"] .dropdown-menu a:hover,
-    [data-theme="red"] .dropdown-menu a:hover,
-    [data-theme="light-red"] .dropdown-menu a:hover,
-    [data-theme="blue"] .dropdown-menu a:hover,
-    [data-theme="black"] .dropdown-menu a:hover,
-    [data-theme="light-black"] .dropdown-menu a:hover,
-    [data-theme="white"] .dropdown-menu a:hover,
-    [data-theme="light-white"] .dropdown-menu a:hover {
-      color: white !important; /* Make sure the text turns white when hovering */
-    }
-
-    /* Fix Blue submenu buttons' text color */
-    #blue-submenu a {
-      color: #0d47a1 !important; /* Dark blue color for better visibility */
-    }
-
-    #blue-submenu a:hover {
-      background-color: var(--button-hover-bg);
-      color: white !important; /* White text on hover for contrast */
-    }
-
-    /* Fix Red submenu buttons' text color */
-    #red-submenu a {
-      color: #b71c1c !important; /* Dark red color for better visibility */
-    }
-
-    #red-submenu a:hover {
-      background-color: #e53935; /* Darker red background on hover */
-      color: white !important; /* White text on hover for contrast */
-    }
-
-    /* Fix Black submenu buttons' text color */
-    #black-submenu a {
-      color: #212121 !important; /* Dark color for better visibility */
-    }
-
-    #black-submenu a:hover {
-      background-color: #616161; /* Dark gray background on hover */
-      color: white !important; /* White text on hover for contrast */
-    }
-
-    /* Fix White submenu buttons' text color */
-    #white-submenu a {
-      color: #757575 !important; /* Medium gray color for better visibility */
-    }
-
-    #white-submenu a:hover {
-      background-color: #e0e0e0; /* Light gray background on hover */
-      color: #212121 !important; /* Dark text on hover for contrast */
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      scroll-behavior: smooth;
-      transition: all 0.3s ease;
-    }
-
-    body {
-  font-family: 'Inter', sans-serif;
-  line-height: 1.5;
-  background-color: var(--bg-color);
-  color: var(--text-color);
-}
-
-    header {
-       background: linear-gradient(135deg, var(--accent-color), var(--button-hover-bg));
-      color: white;
-      padding: 1rem 2rem;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      margin-left: 20px;
-    }
-
-    .container {
-      padding: 2rem;
-    }
-
-    .theme-toggle-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-
-    .toggle-theme {
-      background: var(--button-bg);
-      border: 2px solid var(--accent-color);
-      padding: 0.75rem 2rem;
-      border-radius: 50px;
-      color: var(--button-text-color); /* Button text color dynamically changes */
-      font-weight: bold;
-      font-size: 1rem;
-      text-transform: uppercase;
+    .suggestions div {
+      padding: var(--spacing-sm) var(--spacing-md);
       cursor: pointer;
-      transition: all 0.3s ease-in-out;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      transition: background-color var(--transition-fast);
     }
 
-    .toggle-theme:hover {
-      background: var(--button-hover-bg);
-      transform: scale(1.05);
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+    .suggestions div:hover {
+      background-color: var(--neutral-100);
+      color: var(--primary-color);
     }
 
-    .toggle-theme:active {
-      background: var(--button-active-bg);
-      transform: scale(0.98);
+    [data-theme="dark"] .suggestions div:hover {
+      background-color: var(--neutral-700);
     }
 
-    .toggle-theme:focus {
-      outline: none;
-      box-shadow: 0 0 0 3px rgba(85, 137, 255, 0.5);
-    }
-
-    .dropdown-menu {
-      display: none;
-      background-color: white;
-      position: absolute;
-      top: 100%;
-      left: 10%; /* Shift the submenu to the right of the button */
-      margin-top: 10px;
-      margin-left: 10px; /* Add a small margin to create space */
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      padding: 10px;
-      transition: all 0.3s ease-in-out;
-      z-index: 999;
-      width: 140px; /* Adjusted width for submenu */
-      max-width: 100%;
-      overflow: hidden;
-    }
-
-    .dropdown-submenu {
-      display: none;
-      position: absolute;
-      left: 10%; /* Adjust the submenu to appear directly to the right of the parent menu */
-      top: 550%;
-      margin-left: 10px; /* Add some space between the button and the submenu */
-      background-color: #f5f5f5;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      padding: 10px;
-      z-index: 1000;
-      width: 140px; /* You can adjust the width of the submenu */
-      max-width: 100%;
-      overflow: hidden;
-    }
-
-    .dropdown-menu a {
-      color: var(--text-color); /* Set text color to match the theme's text color */
-      text-decoration: none;
-      display: block;
-      padding: 8px;
-      margin: 4px 0;
-      border-radius: 4px;
-    }
-
-    .dropdown-menu a:hover {
-      background-color: var(--button-hover-bg); /* Hover color */
-      color: white; /* Ensure text turns white on hover */
-    }
-
-    footer {
-  font-size: calc(5px + 0.5vw); /* Footer text size scales */
-  text-align: center;
-  padding: 1rem;
-}
-
-    .collapsible {
-      background: var(--button-bg);
-      color: white;
-      cursor: pointer;
-      padding: 1.5rem 2rem;
-      width: 100%;
-      border: none;
+    /* Hero Section */
+    .hero {
+      background-color: var(--card-bg);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-2xl);
+      margin: var(--spacing-2xl) 0;
       text-align: center;
-      outline: none;
-      font-size: 1.60rem;
-      border-radius: 10px;
-      margin-top: 1rem;
-      min-width: 160px;
-      height: 160px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      transition: all 0.3s ease;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-color);
     }
 
-    .collapsible:hover {
-      background: var(--button-hover-bg);
-      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
-      transform: translateY(-2px);
-    }
-
-    .collapsible:active {
-      background: var(--button-active-bg);
-      transform: translateY(2px);
-    }
-
-    .collapsible .active {
-      background-color: var(--button-hover-bg);
-    }
-
-    .content {
-      max-height: 0;
-      opacity: 0;
-      overflow: hidden;
-      transition: max-height 0.7s ease, opacity 0.7s ease;
-      background-color: #fff;
-      margin-top: 0.5rem;
-      padding: 0 1rem;
-      font-family: Consolas, monospace;
-      font-size: 0.9rem;
-      color: #222;
-      border-radius: 5px;
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-      border: 2px solid #ccc;
-      text-align: left;
-      white-space: pre-wrap;
-      pointer-events: none;
-    }
-
-    .content.show {
-      max-height: 500px; /* Or use scrollHeight dynamically with JS */
-      opacity: 1;
-      padding: 1rem;
-      pointer-events: auto;
-    }
-
-    [data-theme="dark"] .content {
-      background-color: #1e1e1e;
-      color: #e0e0e0;
-      border-color: #444;
-    }
-    
-    [data-theme="black"] .content {
-      background-color: #121212;
-      color: #e0e0e0;
-      border-color: #444;
-    }
-
-    /* Copy button styles */
-    .heading-container {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .copy-btn {
-      background: var(--button-bg);
-      color: var(--button-text-color);
-      border: none;
-      border-radius: 6px;
-      padding: 10px 20px;
-      cursor: pointer;
-      font-size: 16px;
-      display: flex;
-      align-items: center;
-      transition: all 0.2s ease;
-    }
-
-    .copy-btn:hover {
-      background: var(--button-hover-bg);
-      transform: translateY(-2px);
-	  background: var(--button-hover-bg);
-  transform: scale(1.05);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
-    }
-
-    .copy-btn:active {
-      transform: translateY(1px);
-	  transform: scale(0.98);
-    }
-	
-	/* Download button styles - ADD THIS SECTION */
-.download-btn {
-  background: var(--button-bg);
-  color: var(--button-text-color);
-  border: none;
-  border-radius: 6px;
-  padding: 10px 20px;
-  cursor: pointer;
-  font-size: 16px;
-  display: flex;
-  align-items: center;
-  margin-left: 10px;
-  transition: all 0.2s ease;
-}
-
-.download-btn:hover {
-  background: var(--button-hover-bg);
-  transform: translateY(-2px);
-  background: var(--button-hover-bg);
-  transform: scale(1.05);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
-}
-
-.download-btn:active {
-  transform: translateY(1px);
-  transform: scale(0.98);
-}
-/* End of download button styles */
-
-    /* Tooltip styling */
-    .tooltip {
-      position: relative;
+    .hero h1 {
+      margin-bottom: var(--spacing-md);
+      font-size: 2.5rem;
+      background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
       display: inline-block;
     }
 
-    .tooltip .tooltiptext {
-      visibility: hidden;
-      width: 100px;
-      background-color: #555;
-      color: #fff;
-      text-align: center;
-      border-radius: 6px;
-      padding: 5px;
-      position: absolute;
-      z-index: 1;
-      bottom: 125%;
-      left: 50%;
-      margin-left: -50px;
-      opacity: 0;
-      transition: opacity 0.3s;
-      font-size: 12px;
+    .hero p {
+      font-size: 1.1rem;
+      max-width: 700px;
+      margin: 0 auto var(--spacing-lg);
+      color: var(--neutral-500);
     }
-	
-	@media (max-width: 768px) {
-  .theme-search-container {
-    flex-direction: column; /* Stack elements vertically */
-    align-items: stretch; /* Stretch to full width */
-    gap: 10px; /* Reduce spacing for small screens */
-  }
 
-  .search-bar input {
-    width: 100%; /* Take full width on small screens */
-  }
-
-  .toggle-theme {
-    width: 100%; /* Make the button full width */
-  }
-}
-
-    .tooltip .tooltiptext.show {
-      visibility: visible;
-      opacity: 1;
+    /* Tools Grid */
+    .tools-section {
+      padding: var(--spacing-xl) 0;
     }
-	#device-modal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 2000;
-  justify-content: center;
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .tool-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: var(--spacing-xl);
+    }
+
+    /* Tool Card */
+    .tool-card {
+      background-color: var(--card-bg);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+      border: 1px solid var(--border-color);
+      position: relative;
+    }
+
+    .tool-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .card-header {
+      padding: var(--spacing-lg);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .card-title {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      margin-bottom: var(--spacing-md);
+    }
+
+    .card-title h3 {
+      margin: 0;
+      font-size: 1.25rem;
+    }
+
+    .card-title .icon {
+      font-size: 1.5rem;
+      color: var(--primary-color);
+    }
+
+    .card-actions {
+      display: flex;
+      gap: var(--spacing-sm);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-md);
+      font-weight: 500;
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      border: none;
+    }
+
+    .btn-primary {
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    .btn-primary:active {
+      transform: translateY(1px);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      color: var(--text-color);
+      border: 1px solid var(--border-color);
+    }
+
+    .btn-outline:hover {
+      background-color: var(--neutral-100);
+      transform: translateY(-2px);
+    }
+
+    [data-theme="dark"] .btn-outline:hover {
+      background-color: var(--neutral-700);
+    }
+
+    .btn-icon {
+      padding: 0.5rem;
+      border-radius: var(--radius-md);
+    }
+
+    .collapsible {
+  display: flex;
   align-items: center;
-}
-
-#device-modal-content {
-  background-color: #ffffff;
-  color: #333333;
-  padding: 20px;
-  border-radius: 10px;
-  text-align: center;
-  width: 90%;
-  max-width: 400px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-}
-
-#device-modal-content h2 {
-  margin-bottom: 20px;
-  font-size: 1.5rem;
-}
-
-#device-modal-content button {
-  background: #007bff;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  padding: 10px 20px;
-  font-size: 1rem;
-  margin: 5px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-#device-modal-content button:hover {
-  background: #0056b3;
-}
-
-/* Mobile-specific styles */
-body.mobile-friendly {
-  font-size: 14px; /* Smaller font size */
-  padding: 10px; /* Reduced padding */
-}
-
-body.mobile-friendly header {
-  font-size: 1.2rem; /* Smaller header font */
-}
-
-body.mobile-friendly .container-grid {
-  grid-template-columns: 1fr; /* Single column layout */
-}
-
-body.mobile-friendly #device-modal-content {
-  width: 95%; /* Slightly wider modal for mobile users */
-}
-
-body.mobile-friendly #device-modal-content button {
-  padding: 60px 16px; /* Smaller buttons */
-  font-size: 0.9rem;
-}
-
-/* Mobile-specific styles */
-@media (max-width: 768px) {
-  .container-grid {
-    grid-template-columns: 1fr; /* Single column layout for mobile */
-    gap: 1rem; /* Reduce the gap between cards */
-  }
-
-  .tool-card {
-    width: 100%; /* Make cards take the full width of the container */
-    padding: 10px; /* Reduce padding for cards */
-    font-size: 0.9rem; /* Adjust font size for better readability */
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(15px);
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-  padding: 1.5rem;
-  transition: all 0.3s ease-in-out;
-}
-
-  .collapsible {
-    font-size: 1rem; /* Adjust button size */
-    height: auto; /* Allow the button height to adjust dynamically */
-    padding: 1rem; /* Adjust padding for better touch interaction */
-  }
-
-  .content {
-    font-size: 0.8rem; /* Smaller font size for code content */
-  }
-
-  #device-modal-content {
-    width: 90%; /* Adjust modal width for smaller screens */
-	
-	@media (max-width: 768px) {
-  .container-grid .collapsible {
-    height: 120px !important; /* Make the button taller */
-    padding: 2rem 1rem !important; /* Ensure vertical padding */
-	
-
-:root {
-  --font-body: 'Inter', sans-serif;
-  --font-heading: 'Montserrat', sans-serif;
-  --spacing-xs: 0.25rem;
-  --spacing-sm: 0.5rem;
-  --spacing-md: 1rem;
-  --spacing-lg: 1.5rem;
-  --spacing-xl: 2rem;
-  --spacing-2xl: 3rem;
-  --radius-md: 0.5rem;
-  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
-  --transition-normal: 250ms ease;
-  --border-color: #ccc;
-  --card-bg: #fff;
-  --text-color: #000;
-}
-
-html {
-  font-size: calc(5px + 0.5vw);
-}
-
-body {
-  font-family: var(--font-body);
-  color: var(--text-color);
-  margin: 0;
-  padding: 0;
-  font-size: 1rem;
-}
-
-h1, h2, h3 {
-  font-family: var(--font-heading);
-  margin-bottom: var(--spacing-sm);
-  line-height: 1.2;
-}
-
-.container, .tool-card, .search-bar, .content {
+  justify-content: space-between;
   width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
-}
-
-.tool-grid {
-  display: grid;
-  gap: var(--spacing-md);
-  padding: var(--spacing-md);
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-}
-
-.tool-card {
+  border: none;
   background-color: var(--card-bg);
+  color: var(--text-color);
+  padding: var(--spacing-md) var(--spacing-lg);
+  text-align: left;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
   border-radius: var(--radius-md);
-  box-shadow: var(--shadow-lg);
-  padding: var(--spacing-md);
-  transition: transform var(--transition-normal);
 }
 
-.tool-card:hover {
-  transform: translateY(-5px);
-}
 
-.content {
+    [data-theme="dark"] .collapsible {
+      background-color: var(--neutral-700);
+    }
+
+    .collapsible:hover {
+      background-color: var(--neutral-200);
+    }
+
+    [data-theme="dark"] .collapsible:hover {
+      background-color: var(--neutral-600);
+    }
+
+    .collapsible-icon {
+      font-size: 1.25rem;
+      transition: transform var(--transition-fast);
+    }
+
+    .collapsible.active .collapsible-icon {
+      transform: rotate(180deg);
+    }
+
+    .content {
   max-height: 0;
   overflow: hidden;
-  transition: max-height var(--transition-normal), width var(--transition-normal);
+  transition: max-height var(--transition-normal);
   background-color: var(--card-bg);
   padding: var(--spacing-lg);
   font-family: 'Fira Code', monospace;
   font-size: 0.95rem;
   border-radius: var(--radius-md);
   white-space: pre;
-  overflow-x: hidden;
+  overflow-x: hidden; /* hide scroll bar initially */
 }
 
 .content.show {
   max-height: 1000px;
-  overflow-x: auto;
-  width: 200%;
+  padding: var(--spacing-lg);
+  border-top: 1px solid var(--border-color);
+  overflow-x: auto; /* show scrollbar only when open */
 }
 
-/* Responsive typography and scaling */
-@media (max-width: 768px) {
-  .tool-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
+    /* Tooltip */
+    .tooltip {
+      position: relative;
+    }
+
+    .tooltip .tooltip-text {
+      visibility: hidden;
+      position: absolute;
+      bottom: 125%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: var(--neutral-700);
+      color: white;
+      text-align: center;
+      padding: 5px 10px;
+      border-radius: var(--radius-sm);
+      font-size: 0.75rem;
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity var(--transition-normal), visibility var(--transition-normal);
+      z-index: 1;
+    }
+
+    .tooltip .tooltip-text::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: var(--neutral-700) transparent transparent transparent;
+    }
+
+    .tooltip:hover .tooltip-text {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--card-bg);
+      border-top: 1px solid var(--border-color);
+      padding: var(--spacing-xl) 0;
+      margin-top: var(--spacing-2xl);
+    }
+
+    .footer-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--spacing-lg);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: var(--spacing-lg);
+    }
+
+    .footer-link {
+      color: var(--neutral-500);
+      transition: color var(--transition-fast);
+    }
+
+    .footer-link:hover {
+      color: var(--primary-color);
+    }
+
+    .copyright {
+      color: var(--neutral-500);
+      font-size: 0.875rem;
+    }
+
+    /* Media Queries */
+    @media (max-width: 768px) {
+      .header-container {
+        flex-direction: column;
+        gap: var(--spacing-md);
+      }
+      
+      .controls {
+        width: 100%;
+        justify-content: space-between;
+      }
+      
+      .search-container {
+        max-width: none;
+        width: 100%;
+      }
+      
+      .tool-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .footer-container {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .footer-links {
+        justify-content: center;
+      }
+    }
+	
+	@media (max-width: 1024px) {
+  body {
+    font-size: 0.95rem;
   }
-  .tool-card {
-    width: 100%;
-    padding: 10px;
+  .tool-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  body {
     font-size: 0.9rem;
   }
-  .collapsible {
-    font-size: 1.2rem;
-    height: auto;
-    padding: 1.5rem;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    line-height: 1.5;
+  h1 {
+    font-size: 1.5rem;
   }
-  .content {
-    font-size: 0.85rem;
+  h2 {
+    font-size: 1.25rem;
+  }
+  h3 {
+    font-size: 1.1rem;
+  }
+  .tool-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+  .content.show {
+    width: 100%;
   }
 }
 
-
-
+@media (max-width: 480px) {
+  body {
+    font-size: 0.85rem;
+  }
+  .tool-grid {
+    grid-template-columns: 1fr;
+  }
+}
+	
+	
   </style>
 </head>
+
 <body>
   <header>
-    <nav>
-      <div>
-	  <div id="device-modal">
-  <div id="device-modal-content">
-    <h2>What Device Are You On?</h2>
-    <button onclick="setDevice('Mobile')">Mobile</button>
-    <button onclick="setDevice('Xbox')">Xbox</button>
-    <button onclick="setDevice('PS')">PS</button>
-    <button onclick="setDevice('PC')">PC</button>
-  </div>
-</div>
-
-            <a href="/"> <img src="logo-transparent-png.png" alt="Your Logo" class="header-logo">
-            </a>
-        </div>
-		<div>
-		<div class="theme-search-container">
-  <!-- Search Bar -->
+    <div class="container header-container">
+      <div class="header-logo">
+        <img src="logo-transparent-png.png" alt="CodeRepo Logo" height="65">
+        <span class="logo-text">CodeNest</span>
+      </div>
+      
+      <div class="controls">
+        <div class="theme-search-container">
+  <div class="search-wrapper">
   <div class="search-bar">
     <input 
       type="text" 
       id="search-input" 
-      placeholder="Search for files" 
+      placeholder="Search for tools..." 
       oninput="filterFiles()" 
     />
     <button onclick="filterFiles()">🔍</button>
   </div>
+  <div class="suggestions" id="search-suggestions"></div>
+</div>
 
-  <!-- Change Theme Button -->
-  <div class="theme-toggle-container">
-    <button class="toggle-theme" onclick="toggleDropdown()">Change Theme</button>
-    <div id="theme-dropdown" class="dropdown-menu">
-      <a href="#" onclick="toggleSubmenu('blue')">Blue Themes</a>
-      <a href="#" onclick="toggleSubmenu('red')">Red Themes</a>
-      <a href="#" onclick="toggleSubmenu('black')">Black Themes</a>
-      <a href="#" onclick="toggleSubmenu('white')">White Themes</a>
-    </div>
-    <div id="blue-submenu" class="dropdown-submenu">
-      <a href="#" onclick="changeTheme('light-blue')">Light Blue</a>
-      <a href="#" onclick="changeTheme('dark')">Dark Blue</a>
-    </div>
-    <div id="red-submenu" class="dropdown-submenu">
-      <a href="#" onclick="changeTheme('light-red')">Light Red</a>
-      <a href="#" onclick="changeTheme('red')">Dark Red</a>
-    </div>
-    <div id="black-submenu" class="dropdown-submenu">
-      <a href="#" onclick="changeTheme('black')">Dark Black</a>
-      <a href="#" onclick="changeTheme('light-black')">Gray</a>
-    </div>
-    <div id="white-submenu" class="dropdown-submenu">
-      <a href="#" onclick="changeTheme('light-white')">Off-White</a>
-      <a href="#" onclick="changeTheme('white')">Pure White</a>
-    </div>
+        
+        <div class="theme-toggle-container">
+  <button class="toggle-theme" id="theme-toggle" onclick="toggleDropdown()">
+    <span>Change Theme</span>
+    <span>🎨</span>
+  </button>
+
+  <!-- Main Dropdown -->
+  <div class="dropdown-menu" id="theme-dropdown">
+    <a href="#" onclick="toggleSubmenu('blue')">Blue Themes</a>
+    <a href="#" onclick="toggleSubmenu('red')">Red Themes</a>
+    <a href="#" onclick="toggleSubmenu('black')">Black Themes</a>
+    <a href="#" onclick="toggleSubmenu('white')">White Themes</a>
+  </div>
+
+  <!-- Submenus -->
+  <div id="blue-submenu" class="dropdown-submenu">
+    <a href="#" onclick="changeTheme('light-blue')">Light Blue</a>
+    <a href="#" onclick="changeTheme('dark')">Dark Blue</a>
+  </div>
+  <div id="red-submenu" class="dropdown-submenu">
+    <a href="#" onclick="changeTheme('light-red')">Light Red</a>
+    <a href="#" onclick="changeTheme('red')">Dark Red</a>
+  </div>
+  <div id="black-submenu" class="dropdown-submenu">
+    <a href="#" onclick="changeTheme('black')">Dark Black</a>
+    <a href="#" onclick="changeTheme('light-black')">Gray</a>
+  </div>
+  <div id="white-submenu" class="dropdown-submenu">
+    <a href="#" onclick="changeTheme('light-white')">Off-White</a>
+    <a href="#" onclick="changeTheme('white')">Pure White</a>
   </div>
 </div>
+
       </div>
-    </nav>
+    </div>
   </header>
 
-  <section class="container" id="home">
-  <h1>Welcome!</h1>
-  <p>Here You Can Look Around For Some Fun Files, You Might Find Something To Play With Here Too</p>
-</section>
-
-<section class="container">
-  <div class="container-grid">
-
-    <!-- START AutoTyper -->
-    <div class="tooltip-container">
-  <section id="autotyper" class="tool-card">
-    <div class="heading-container">
-      <h2>📝 AutoTyper.bat</h2>
-      <button class="copy-btn tooltip" onclick="copyCode('autotyper-code')">
-        <span class="tooltiptext" id="autotyper-tooltip">Copy to clipboard</span>
-        📋 Copy Code
-      </button>
-      <button class="download-btn tooltip" onclick="downloadCode('autotyper-code', 'AutoTyper.bat')">
-        <span class="tooltiptext" id="autotyper-download-tooltip">Download file</span>
-        👅 Download
-      </button>
-    </div>
-    <button class="collapsible">📄 Click to View AutoTyper.bat Code</button>
-    <div class="content" id="autotyper-code">
+  <main>
+    <div class="container">
+      <section class="hero">
+        <h1>Developer Tools Repository</h1>
+        <p>Browse our collection of useful batch scripts, utilities, and developer tools. Download, copy, or modify them for your projects.</p>
+      </section>
+      
+      <section class="tools-section">
+        <div class="section-header">
+          <h2>Available Tools</h2>
+        </div>
+        
+        <div class="tool-grid">
+          <!-- AutoTyper Tool Card -->
+          <div class="tool-card" id="autotyper">
+            <div class="card-header">
+              <div class="card-title">
+                <span class="icon">📝</span>
+                <h3>AutoTyper.bat</h3>
+              </div>
+              <div class="card-actions">
+                <button class="btn btn-primary tooltip" onclick="copyCode('autotyper-code')">
+                  <span class="tooltip-text" id="autotyper-tooltip">Copy to clipboard</span>
+                  <span>📋 Copy</span>
+                </button>
+                <button class="btn btn-outline tooltip" onclick="downloadCode('autotyper-code', 'AutoTyper.bat')">
+                  <span class="tooltip-text" id="autotyper-download-tooltip">Download file</span>
+                  <span>⬇️ Download</span>
+                </button>
+              </div>
+            </div>
+            <button class="collapsible">
+              <span>View AutoTyper.bat Code</span>
+              <span class="collapsible-icon">▼</span>
+            </button>
+            <div class="content" id="autotyper-code">
 @echo off
 chcp 65001 >nul
 title 🚀 Auto Typer - By Ryan Watson
@@ -1044,34 +1105,38 @@ for /f "tokens=1-3 delims=/-. " %%a in (\"%date%\") do (
     set \"year=%%c\"
 )
 
-echo [38;2;0;255;0m╔════════════════════════════════════════════════════════════════════════════╗[0m
-echo [38;2;0;200;0m║                        Auto Typer - By Ryan Watson                         ║[0m
-echo [38;2;0;150;0m╠════════════════════════════════════════════════════════════════════════════╣[0m
-echo [38;2;0;200;0m║                          %month%-%day%-%year%                                         ║[0m
-echo [38;2;0;255;0m╚════════════════════════════════════════════════════════════════════════════╝[0m
+echo [38;2;0;255;0m╔════════════════════════════════════════════════════════════════════════════╗[0m
+echo [38;2;0;200;0m║                        Auto Typer - By Ryan Watson                         ║[0m
+echo [38;2;0;150;0m╠════════════════════════════════════════════════════════════════════════════╣[0m
+echo [38;2;0;200;0m║                          %month%-%day%-%year%                                         ║[0m
+echo [38;2;0;255;0m╚════════════════════════════════════════════════════════════════════════════╝[0m
 echo.
-    </div>
-  </section>
-  <span class="card-tooltip">Quickly repeat typed text</span>
-</div>
-
-
-    <!-- START CustomCMD -->
-    <div class="tooltip-container">
-  <section id="customcmd" class="tool-card">
-    <div class="heading-container">
-      <h2>🧪 CustomCMD.bat</h2>
-      <button class="copy-btn tooltip" onclick="copyCode('customcmd-code')">
-        <span class="tooltiptext" id="customcmd-tooltip">Copy to clipboard</span>
-        📋 Copy Code
-      </button>
-      <button class="download-btn tooltip" onclick="downloadCode('customcmd-code', 'CustomCMD.bat')">
-        <span class="tooltiptext" id="customcmd-download-tooltip">Download file</span>
-        👅 Download
-      </button>
-    </div>
-    <button class="collapsible">📄 Click to View CustomCMD.bat Code</button>
-    <div class="content" id="customcmd-code">
+            </div>
+          </div>
+          
+          <!-- CustomCMD Tool Card -->
+          <div class="tool-card" id="customcmd">
+            <div class="card-header">
+              <div class="card-title">
+                <span class="icon">🧪</span>
+                <h3>CustomCMD.bat</h3>
+              </div>
+              <div class="card-actions">
+                <button class="btn btn-primary tooltip" onclick="copyCode('customcmd-code')">
+                  <span class="tooltip-text" id="customcmd-tooltip">Copy to clipboard</span>
+                  <span>📋 Copy</span>
+                </button>
+                <button class="btn btn-outline tooltip" onclick="downloadCode('customcmd-code', 'CustomCMD.bat')">
+                  <span class="tooltip-text" id="customcmd-download-tooltip">Download file</span>
+                  <span>⬇️ Download</span>
+                </button>
+              </div>
+            </div>
+            <button class="collapsible">
+              <span>View CustomCMD.bat Code</span>
+              <span class="collapsible-icon">▼</span>
+            </button>
+            <div class="content" id="customcmd-code">
 @echo off
 cls
 title Batchcc
@@ -1084,8 +1149,8 @@ goto cmd
 
 
 :cmd
-echo [38;2;0;170;255m┌──(Kali㉿%Dev%-%Acc%)-[~][0m
-set /p "cmd=[38;2;0;200;255m└─$ "[0m
+echo [38;2;0;170;255m┌──(Kali㉿%Dev%-%Acc%)-[~][0m
+set /p "cmd=[38;2;0;200;255m└─$ "[0m
 
 if /i "%cmd%"=="help" (
     echo Available Commands:
@@ -1203,26 +1268,31 @@ echo.
 goto cmd
 
       </div>
-  </section>
-  <span class="card-tooltip">A command prompt with built-in shortcuts and fun tools</span>
-</div>
+     </div>
 
    
-	  <div class="tooltip-container">
-  <section id="passgen" class="tool-card">
-    <div class="heading-container">
-      <h2>🔑 PasswordGenerator.bat</h2>
-      <button class="copy-btn tooltip" onclick="copyCode('passgen-code')">
-        <span class="tooltiptext" id="passgen-tooltip">Copy to clipboard</span>
-        📋 Copy Code
+	  <div class="tool-card" id="passgen">
+  <div class="card-header">
+    <div class="card-title">
+      <span class="icon">🔑</span>
+      <h3>PasswordGenerator.bat</h3>
+    </div>
+    <div class="card-actions">
+      <button class="btn btn-primary tooltip" onclick="copyCode('passgen-code')">
+        <span class="tooltip-text" id="passgen-tooltip">Copy to clipboard</span>
+        <span>📋 Copy</span>
       </button>
-      <button class="download-btn tooltip" onclick="downloadCode('passgen-code', 'PasswordGenerator.bat')">
-        <span class="tooltiptext" id="passgen-download-tooltip">Download file</span>
-        👅 Download
+      <button class="btn btn-outline tooltip" onclick="downloadCode('passgen-code', 'PasswordGenerator.bat')">
+        <span class="tooltip-text" id="passgen-download-tooltip">Download file</span>
+        <span>⬇️ Download</span>
       </button>
     </div>
-    <button class="collapsible">📄 Click to View CustomCMD.bat Code</button>
-    <div class="content" id="passgen-code">
+  </div>
+  <button class="collapsible">
+    <span>View PasswordGenerator.bat Code</span>
+    <span class="collapsible-icon">▼</span>
+  </button>
+  <div class="content" id="passgen-code">
 @echo off
 setlocal EnableDelayedExpansion
 title Advanced Password Generator - With Length Cap + CMD Output
@@ -1333,27 +1403,32 @@ echo.
 pause
 exit
 
-      </div>
-  </section>
-  <span class="card-tooltip">Generates customizable, secure passwords with optional length cap and variations</span>
-</div>
+	 </div>
+    </div>
 
-    <!-- START Zip Cracker -->
-    <div class="tooltip-container">
-  <section id="zipcracker" class="tool-card">
-    <div class="heading-container">
-      <h2>🔓 Zip Cracker.bat</h2>
-      <button class="copy-btn tooltip" onclick="copyCode('zipcracker-code')">
-        <span class="tooltiptext" id="zipcracker-tooltip">Copy to clipboard</span>
-        📋 Copy Code
+      <!-- Zip Cracker Tool Card -->
+<div class="tool-card" id="zipcracker">
+  <div class="card-header">
+    <div class="card-title">
+      <span class="icon">🔓</span>
+      <h3>Zip Cracker.bat</h3>
+    </div>
+    <div class="card-actions">
+      <button class="btn btn-primary tooltip" onclick="copyCode('zipcracker-code')">
+        <span class="tooltip-text" id="zipcracker-tooltip">Copy to clipboard</span>
+        <span>📋 Copy</span>
       </button>
-      <button class="download-btn tooltip" onclick="downloadCode('zipcracker-code', 'ZipCracker.bat')">
-        <span class="tooltiptext" id="zipcracker-download-tooltip">Download file</span>
-        👅 Download
+      <button class="btn btn-outline tooltip" onclick="downloadCode('zipcracker-code', 'ZipCracker.bat')">
+        <span class="tooltip-text" id="zipcracker-download-tooltip">Download file</span>
+        <span>⬇️ Download</span>
       </button>
     </div>
-    <button class="collapsible">📄 Click to View ZipCracker.bat Code</button>
-    <div class="content" id="zipcracker-code">
+  </div>
+  <button class="collapsible">
+    <span>View ZipCracker.bat Code</span>
+    <span class="collapsible-icon">▼</span>
+  </button>
+  <div class="content" id="zipcracker-code">
 @echo off
 setlocal enabledelayedexpansion
 
@@ -1397,28 +1472,32 @@ if %errorlevel% EQU 0 (
     exit
 )
 exit /b
-
       </div>
-  </section>
-  <span class="card-tooltip">Cracks password-protected ZIP files by attempting every password in a password list</span>
-</div>
+     </div>
 
     <!-- START Number Guessing Game -->
-<div class="tooltip-container">
-  <section id="guessinggame" class="tool-card">
-    <div class="heading-container">
-      <h2>🔢 Number Guessing Game.bat</h2>
-      <button class="copy-btn tooltip" onclick="copyCode('guessinggame-code')">
-        <span class="tooltiptext" id="guessinggame-tooltip">Copy to clipboard</span>
-        📋 Copy Code
+<div class="tool-card" id="guessinggame">
+  <div class="card-header">
+    <div class="card-title">
+      <span class="icon">🔢</span>
+      <h3>Number Guessing Game.bat</h3>
+    </div>
+    <div class="card-actions">
+      <button class="btn btn-primary tooltip" onclick="copyCode('guessinggame-code')">
+        <span class="tooltip-text" id="guessinggame-tooltip">Copy to clipboard</span>
+        <span>📋 Copy</span>
       </button>
-      <button class="download-btn tooltip" onclick="downloadCode('guessinggame-code', 'NumberGuessingGame.bat')">
-        <span class="tooltiptext" id="guessinggame-download-tooltip">Download file</span>
-        👅 Download
+      <button class="btn btn-outline tooltip" onclick="downloadCode('guessinggame-code', 'NumberGuessingGame.bat')">
+        <span class="tooltip-text" id="guessinggame-download-tooltip">Download file</span>
+        <span>⬇️ Download</span>
       </button>
     </div>
-    <button class="collapsible">📄 Click to View Number Guessing Game.bat Code</button>
-    <div class="content" id="guessinggame-code">
+  </div>
+  <button class="collapsible">
+    <span>View Number Guessing Game.bat Code</span>
+    <span class="collapsible-icon">▼</span>
+  </button>
+  <div class="content" id="guessinggame-code">
 @echo off
 chcp 65001 >nul
 color 0e
@@ -1461,9 +1540,7 @@ echo.
 exit /b
 pause
       </div>
-  </section>
-  <span class="card-tooltip">A fun game where you guess a randomly generated number within a specified range</span>
-</div>
+  </div>
 
 <footer>
   <p>© 2025 My Site That Shares Source Code</p>
@@ -1473,363 +1550,186 @@ pause
   <script>
   
   
-  // Function to filter files based on the search bar input
+  // ----------------------------
+// Theme Toggle with Submenus
+// ----------------------------
+let currentTheme = localStorage.getItem('theme') || 'blue';
+
+    function changeTheme(themeName) {
+    document.documentElement.setAttribute("data-theme", themeName);
+    localStorage.setItem("theme", themeName);
+    hideAllSubmenus(); // hide submenus after selection
+  }
+
+  function toggleDropdown() {
+    document.getElementById("theme-dropdown").style.display =
+      document.getElementById("theme-dropdown").style.display === "block"
+        ? "none"
+        : "block";
+    hideAllSubmenus();
+  }
+
+  function toggleSubmenu(color) {
+    hideAllSubmenus();
+    const submenu = document.getElementById(`${color}-submenu`);
+    if (submenu) {
+      submenu.style.display = "block";
+    }
+  }
+
+  function hideAllSubmenus() {
+    const submenus = document.querySelectorAll(".dropdown-submenu");
+    submenus.forEach((menu) => (menu.style.display = "none"));
+  }
+
+  // Load saved theme
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme) {
+    changeTheme(savedTheme);
+  }
+
+// ----------------------------
+// Search & Autocomplete Logic
+// ----------------------------
 function filterFiles() {
-  // Get the search query (convert to lowercase for case-insensitive search)
   const query = document.getElementById('search-input').value.toLowerCase();
+  const toolCards = document.querySelectorAll('.tool-card');
 
-  // Get all sections in the grid
-  const sections = document.querySelectorAll('.container-grid section');
+  toolCards.forEach(card => {
+    const heading = card.querySelector('.card-title h3').textContent.toLowerCase();
+    card.style.display = heading.startsWith(query) ? 'block' : 'none';
+  });
 
-  // Loop through each section and check if it matches the query
-  sections.forEach((section) => {
-    const heading = section.querySelector('h2').textContent.toLowerCase(); // Get the text content of the <h2> tag
+  populateSuggestions(query);
+}
 
-    if (heading.includes(query)) {
-      // If the heading includes the query, show the section
-      section.style.display = 'block';
-    } else {
-      // Otherwise, hide the section
-      section.style.display = 'none';
+function populateSuggestions(query) {
+  const suggestionBox = document.getElementById('search-suggestions');
+  suggestionBox.innerHTML = '';
+
+  if (!query) {
+    suggestionBox.style.display = 'none';
+    return;
+  }
+
+  const toolCards = document.querySelectorAll('.tool-card');
+  const matches = [];
+
+  toolCards.forEach(card => {
+    const heading = card.querySelector('.card-title h3').textContent.trim();
+    if (heading.toLowerCase().startsWith(query)) {
+      matches.push(heading);
     }
   });
+
+  if (matches.length === 0) {
+    suggestionBox.style.display = 'none';
+    return;
+  }
+
+  matches.forEach(match => {
+    const div = document.createElement('div');
+    div.textContent = match;
+    div.classList.add('suggestion-item');
+    div.onclick = () => {
+      document.getElementById('search-input').value = match;
+      suggestionBox.style.display = 'none';
+      filterFiles();
+    };
+    suggestionBox.appendChild(div);
+  });
+
+  suggestionBox.style.display = 'block';
 }
-    let currentTheme = localStorage.getItem('theme') || 'blue';
 
-    function changeTheme(theme) {
-      document.documentElement.setAttribute('data-theme', theme);
-      currentTheme = theme;
-      localStorage.setItem('theme', theme);
-      closeSubmenu();
-    }
+document.addEventListener('click', function (event) {
+  const suggestionBox = document.getElementById('search-suggestions');
+  const input = document.getElementById('search-input');
+  if (!suggestionBox.contains(event.target) && event.target !== input) {
+    suggestionBox.style.display = 'none';
+  }
+});
 
-    function toggleSubmenu(theme) {
-      let blueSubmenu = document.getElementById('blue-submenu');
-      let redSubmenu = document.getElementById('red-submenu');
-      let blackSubmenu = document.getElementById('black-submenu');
-      let whiteSubmenu = document.getElementById('white-submenu');
-      
-      // Close all submenus first
-      blueSubmenu.style.display = 'none';
-      redSubmenu.style.display = 'none';
-      blackSubmenu.style.display = 'none';
-      whiteSubmenu.style.display = 'none';
-      
-      // Then open the selected one
-      if (theme === 'blue') {
-        blueSubmenu.style.display = 'block';
-      } else if (theme === 'red') {
-        redSubmenu.style.display = 'block';
-      } else if (theme === 'black') {
-        blackSubmenu.style.display = 'block';
-      } else if (theme === 'white') {
-        whiteSubmenu.style.display = 'block';
-      }
-    }
-
-    function closeSubmenu() {
-      document.getElementById('blue-submenu').style.display = 'none';
-      document.getElementById('red-submenu').style.display = 'none';
-      document.getElementById('black-submenu').style.display = 'none';
-      document.getElementById('white-submenu').style.display = 'none';
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      document.documentElement.setAttribute('data-theme', currentTheme);
-    });
-
-    function toggleDropdown() {
-      const dropdown = document.getElementById('theme-dropdown');
-      dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-      
-      // Close submenus when closing the main dropdown
-      if (dropdown.style.display === 'none') {
-        closeSubmenu();
-      }
-    }
-    
-    // Collapsible functionality for the code sections
-    document.querySelectorAll('.collapsible').forEach(button => {
-      const content = button.nextElementSibling;
-
-      // Add click event listener to each collapsible
-      button.addEventListener('click', () => {
-        // Check if the content is already open
-        if (content.classList.contains('show')) {
-          // Collapse the content
-          content.style.maxHeight = null;
-          content.style.opacity = '0';
-          content.classList.remove('show');
-        } else {
-          // Close any other open collapsibles
-          document.querySelectorAll('.content.show').forEach(openContent => {
-            openContent.style.maxHeight = null;
-            openContent.style.opacity = '0';
-            openContent.classList.remove('show');
-          });
-
-          // Expand the clicked collapsible
-          content.style.maxHeight = `${content.scrollHeight}px`;
-          content.style.opacity = '1';
-          content.classList.add('show');
-        }
-      });
-    });
-
-    // Function to copy code to clipboard
-    function copyCode(elementId) {
+// ----------------------------
+// Copy & Download Code Buttons
+// ----------------------------
+function copyCode(elementId) {
   const codeElement = document.getElementById(elementId);
   const code = codeElement.textContent;
-  
-  // Copy to clipboard
   navigator.clipboard.writeText(code).then(() => {
-    // Show tooltip - fixed to handle all three tooltips
     let tooltipId;
-    if (elementId === 'autotyper-code') {
-  tooltipId = 'autotyper-tooltip';
-} else if (elementId === 'customcmd-code') {
-  tooltipId = 'customcmd-tooltip';
-} else if (elementId === 'passgen-code') {
-  tooltipId = 'passgen-tooltip';
-} else if (elementId === 'zipcracker-code') {
-  tooltipId = 'zipcracker-tooltip';
-} else if (elementId === 'guessinggame-code') {
-  tooltipId = 'guessinggame-tooltip';
-}
-    
+    switch (elementId) {
+      case 'autotyper-code': tooltipId = 'autotyper-tooltip'; break;
+      case 'customcmd-code': tooltipId = 'customcmd-tooltip'; break;
+      case 'passgen-code': tooltipId = 'passgen-tooltip'; break;
+      case 'zipcracker-code': tooltipId = 'zipcracker-tooltip'; break;
+      case 'guessinggame-code': tooltipId = 'guessinggame-tooltip'; break;
+    }
     const tooltip = document.getElementById(tooltipId);
     tooltip.textContent = "Copied!";
     tooltip.classList.add('show');
-    
-    // Hide tooltip after 2 seconds
     setTimeout(() => {
       tooltip.classList.remove('show');
-      setTimeout(() => {
-        tooltip.textContent = "Copy to clipboard";
-      }, 300);
+      setTimeout(() => tooltip.textContent = "Copy to clipboard", 300);
     }, 2000);
-  }).catch(err => {
-    console.error('Could not copy text: ', err);
-  });
+  }).catch(err => console.error('Could not copy text: ', err));
 }
+
 function downloadCode(elementId, filename) {
   const codeElement = document.getElementById(elementId);
   const code = codeElement.textContent;
-  
-  // Create a Blob with the code content
   const blob = new Blob([code], { type: 'text/plain' });
-  
-  // Create a URL for the Blob
   const url = URL.createObjectURL(blob);
-  
-  // Create a temporary anchor element for downloading
   const a = document.createElement('a');
   a.href = url;
   a.download = filename;
-  
-  // Append to body, click to download, then remove
   document.body.appendChild(a);
   a.click();
-  
-  // Clean up
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
-  
-  // Show tooltip feedback
-  let tooltipId;
-  if (elementId === 'autotyper-code') {
-  tooltipId = 'autotyper-download-tooltip';
-} else if (elementId === 'customcmd-code') {
-  tooltipId = 'customcmd-download-tooltip';
-} else if (elementId === 'passgen-code') {
-  tooltipId = 'passgen-download-tooltip';
-} else if (elementId === 'zipcracker-code') {
-  tooltipId = 'zipcracker-download-tooltip';
-} else if (elementId === 'guessinggame-code') {
-  tooltipId = 'guessinggame-download-tooltip';
-}
 
-  
+  let tooltipId;
+  switch (elementId) {
+    case 'autotyper-code': tooltipId = 'autotyper-download-tooltip'; break;
+    case 'customcmd-code': tooltipId = 'customcmd-download-tooltip'; break;
+    case 'passgen-code': tooltipId = 'passgen-download-tooltip'; break;
+    case 'zipcracker-code': tooltipId = 'zipcracker-download-tooltip'; break;
+    case 'guessinggame-code': tooltipId = 'guessinggame-download-tooltip'; break;
+  }
+
   const tooltip = document.getElementById(tooltipId);
   tooltip.textContent = "Downloaded!";
   tooltip.classList.add('show');
-  
-  // Hide tooltip after 2 seconds
   setTimeout(() => {
     tooltip.classList.remove('show');
-    setTimeout(() => {
-      tooltip.textContent = "Download file";
-    }, 300);
+    setTimeout(() => tooltip.textContent = "Download file", 300);
   }, 2000);
 }
 
-const searchInput = document.getElementById('search-input');
-const searchForm = document.getElementById('search-form'); // Assuming you have a form element wrapping your search
-const suggestions = document.createElement('div');
-suggestions.className = 'suggestions';
-searchInput.parentNode.appendChild(suggestions);
-
-const themeDropdown = document.getElementById('theme-dropdown');
-const submenus = document.querySelectorAll('.dropdown-submenu');
-
-// Function to populate suggestions
-function populateSuggestions(query) {
-  if (!query.trim()) {
-    suggestions.style.display = 'none';
-    return;
-  }
-
-  const sections = document.querySelectorAll('.container-grid .tool-card');
-  query = query.toLowerCase();
-
-  // Filter for items that START with the query
-  const matches = Array.from(sections).filter(section => {
-    const headingText = section.querySelector('h2').textContent.toLowerCase();
-    // Extract just the filename part (after the emoji)
-    const filename = headingText.split(' ').slice(1).join(' ').toLowerCase();
-    return filename.startsWith(query);
-  });
-
-  // Populate the suggestions container
-  if (matches.length > 0) {
-    suggestions.innerHTML = matches.map(match => 
-      `<div>${match.querySelector('h2').textContent}</div>`
-    ).join('');
-    suggestions.style.display = 'block';
-    
-    // Add click event to each suggestion
-    const suggestionItems = suggestions.querySelectorAll('div');
-    suggestionItems.forEach(item => {
-      item.addEventListener('click', () => {
-        searchInput.value = item.textContent; // Populate search bar with suggestion text
-        suggestions.style.display = 'none'; // Hide suggestions after selecting one
-        filterFiles(); // Filter the files based on the selected suggestion
-      });
-    });
-  } else {
-    suggestions.style.display = 'none';
-  }
-}
-
-// Event listener for typing in the search bar
-searchInput.addEventListener('input', () => {
-  const query = searchInput.value.toLowerCase();
-
-  // Populate suggestions based on current input
-  populateSuggestions(query);
-
-  // Position the suggestions container below the search bar
-  const rect = searchInput.getBoundingClientRect();
-  suggestions.style.top = `${searchInput.offsetHeight + 10}px`; // Add 10px spacing below the search bar
-  suggestions.style.left = `${rect.left}px`; // Align to the left of the search bar
-  suggestions.style.width = `${searchInput.offsetWidth}px`; // Match the search bar's width
-});
-
-// Event listener for focusing on the search bar
-searchInput.addEventListener('focus', () => {
-  const query = searchInput.value.toLowerCase();
-
-  // Repopulate suggestions if there's already text in the input
-  if (query) {
-    populateSuggestions(query);
-  }
-
-  // Hide the theme dropdown and submenus when focusing on the search bar
-  themeDropdown.style.display = 'none';
-  submenus.forEach(submenu => {
-    submenu.style.display = 'none';
-  });
-
-  // Position the suggestions container below the search bar
-  const rect = searchInput.getBoundingClientRect();
-  suggestions.style.top = `${searchInput.offsetHeight + 10}px`; // Add 10px spacing below the search bar
-  suggestions.style.left = `${rect.left}px`; // Align to the left of the search bar
-  suggestions.style.width = `${searchInput.offsetWidth}px`; // Match the search bar's width
-});
-
-// Hide suggestions and submenus when clicking outside
-document.addEventListener('click', (event) => {
-  // Check if the click is outside the search input, suggestions box, and theme dropdown
-  if (!searchInput.contains(event.target) && !suggestions.contains(event.target)) {
-    suggestions.style.display = 'none';
-  }
-
-  // Hide submenus if the click is outside the theme dropdown
-  if (!themeDropdown.contains(event.target)) {
-    submenus.forEach(submenu => {
-      submenu.style.display = 'none';
-    });
-  }
-});
-
-// Prevent the dropdown from disappearing when clicking inside it
-suggestions.addEventListener('click', (event) => {
-  event.stopPropagation();
-});
-
-// Custom search function (if no form is used)
-function triggerSearch(query) {
-  console.log(`Performing search for: ${query}`);
-  // Add your search logic here (e.g., fetch results or navigate)
-}
-
-// Function to filter files based on the search bar input
-function filterFiles() {
-  // Get the search query (convert to lowercase for case-insensitive search)
-  const query = document.getElementById('search-input').value.toLowerCase();
-  
-  // Get all tooltip containers
-  const tooltipContainers = document.querySelectorAll('.tooltip-container');
-  
-  // If search is empty, show everything in original order and exit
-  if (query === '') {
-    tooltipContainers.forEach(container => {
-      container.style.display = 'block';
-    });
-    return;
-  }
-  
-  // Otherwise filter based on the query
-  tooltipContainers.forEach(container => {
-    const heading = container.querySelector('h2').textContent.toLowerCase();
-    if (heading.includes(query)) {
-      container.style.display = 'block';
+// ----------------------------
+// Collapsible Code Blocks
+// ----------------------------
+document.querySelectorAll('.collapsible').forEach(button => {
+  const content = button.nextElementSibling;
+  button.addEventListener('click', () => {
+    if (content.classList.contains('show')) {
+      content.style.maxHeight = null;
+      content.style.opacity = '0';
+      content.classList.remove('show');
     } else {
-      container.style.display = 'none';
+      document.querySelectorAll('.content.show').forEach(openContent => {
+        openContent.style.maxHeight = null;
+        openContent.style.opacity = '0';
+        openContent.classList.remove('show');
+      });
+      content.style.maxHeight = `${content.scrollHeight}px`;
+      content.style.opacity = '1';
+      content.classList.add('show');
     }
   });
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  // Show the modal when the page loads
-  const modal = document.getElementById('device-modal');
-  modal.style.display = 'flex';
-
-  // Disable scrolling while modal is open
-  document.body.style.overflow = 'hidden';
 });
-
-function setDevice(device) {
-  console.log(`User selected device: ${device}`);
-
-  // Hide the modal
-  const modal = document.getElementById('device-modal');
-  modal.style.display = 'none';
-
-  // Re-enable scrolling
-  document.body.style.overflow = 'auto';
-
-  // Apply mobile-friendly class if the user selected "Mobile"
-  if (device === 'Mobile') {
-    document.body.classList.add('mobile-friendly');
-  } else {
-    document.body.classList.remove('mobile-friendly');
-  }
-
-  // Optionally, store the selected device in localStorage
-  localStorage.setItem('selectedDevice', device);
-}
 
   </script>
 </body>
 </html>
+  
