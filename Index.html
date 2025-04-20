@@ -451,36 +451,53 @@ code {
     }
 
     .dropdown-menu {
-  display: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
   position: absolute;
   top: 125%;
   left: 0;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: var(--card-bg); /* matches theme */
+  color: var(--text-color);          /* matches theme */
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border-color);
   padding: 10px;
   z-index: 999;
   width: 160px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1px;
+}
+
+.dropdown-menu.show {
+  opacity: 1;
+  visibility: visible;
 }
 
 .dropdown-menu a {
   display: block;
-  padding: 8px;
+  width: 100%;
+  white-space: nowrap;
+  padding: 8px 10px;
+  border-radius: var(--radius-md);
   color: var(--text-color);
-  text-decoration: none;
-  border-radius: 4px;
+  transition: background-color var(--transition-normal);
 }
 
 .dropdown-menu a:hover {
   background-color: var(--button-hover-bg);
-  color: white;
+  color: var(--button-text-color);
 }
 
 .dropdown-submenu {
   display: none;
   position: absolute;
-  top: 650%;
-  background-color: white;
+  top: 129%;
+  left: 108%;
+  background-color: var(--card-bg); /* matches theme */
+  color: var(--text-color);          /* matches theme */
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   padding: 10px;
@@ -492,7 +509,6 @@ code {
   display: block;
   white-space: nowrap;
 }
-
 
     [data-theme="dark"] .dropdown-menu a:hover {
       background-color: var(--neutral-700);
@@ -762,6 +778,8 @@ code {
   border-radius: var(--radius-md);
   white-space: pre;
   overflow-x: hidden; /* hide scroll bar initially */
+  opacity: 0;
+  transition: max-height 0.6s ease, opacity 0.7s ease;
 }
 
 .content.show {
@@ -769,6 +787,7 @@ code {
   padding: var(--spacing-lg);
   border-top: 1px solid var(--border-color);
   overflow-x: auto; /* show scrollbar only when open */
+  opacity: 1;
 }
 
     /* Tooltip */
@@ -1567,12 +1586,10 @@ let currentTheme = localStorage.getItem('theme') || 'blue';
   }
 
   function toggleDropdown() {
-    document.getElementById("theme-dropdown").style.display =
-      document.getElementById("theme-dropdown").style.display === "block"
-        ? "none"
-        : "block";
-    hideAllSubmenus();
-  }
+  const dropdown = document.getElementById("theme-dropdown");
+  dropdown.classList.toggle("show");
+  hideAllSubmenus();
+}
 
   function toggleSubmenu(color) {
     hideAllSubmenus();
