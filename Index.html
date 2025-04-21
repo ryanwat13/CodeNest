@@ -299,7 +299,10 @@ code {
       color: var(--text-color);
       background-color: var(--bg-color);
       transition: background-color var(--transition-normal), color var(--transition-normal);
-    }
+      display: flex;
+	  flex-direction: column;
+	  min-height: 100vh;
+	}
 
     h1, h2, h3, h4, h5, h6 {
       font-family: var(--font-heading);
@@ -623,6 +626,13 @@ code {
     .tools-section {
       padding: var(--spacing-xl) 0;
     }
+	
+	.fade-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* spacing between buttons */
+}
+
 
     .section-header {
       display: flex;
@@ -829,21 +839,26 @@ code {
       opacity: 1;
     }
 
-    /* Footer */
-    footer {
-      background-color: var(--card-bg);
-      border-top: 1px solid var(--border-color);
-      padding: var(--spacing-xl) 0;
-      margin-top: var(--spacing-2xl);
-    }
+footer {
+  background-color: var(--card-bg);
+  border-top: 1px solid var(--border-color);
+  padding: var(--spacing-xl) 0;
+  margin-top: var(--spacing-2xl);
+  width: 100%;
+  text-align: center; /* Center text */
+}
 
-    .footer-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: var(--spacing-lg);
-    }
+.footer-container {
+  width: 100%; /* Full width */
+  display: block; /* Change from flex to block */
+  text-align: center; /* Center text */
+  padding: var(--spacing-md);
+}
+
+.footer-container p {
+  margin: 0 auto; /* Center the paragraph */
+  text-align: center; /* Center text within paragraph */
+}
 
     .footer-links {
       display: flex;
@@ -933,13 +948,68 @@ code {
     grid-template-columns: 1fr;
   }
 }
+
+.site-footer {
+  text-align: center;
+  padding: 20px;
+  color: #ccc;
+  margin-top: auto;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-fade-in {
+  animation: fadeIn 1.8s ease-in-out;
+}
+
+@keyframes fadeInTop {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInMiddle {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInLate {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-top {
+  animation: fadeInTop 0.6s ease-out forwards;
+}
+
+.fade-middle {
+  animation: fadeInMiddle 0.8s ease-out forwards;
+  animation-delay: 0.4s;
+  opacity: 0;
+}
+
+.fade-late {
+  animation: fadeInLate 0.8s ease-out forwards;
+  animation-delay: 1s;
+  opacity: 0;
+}
+
+
 	
 	
   </style>
 </head>
 
 <body>
-  <header>
+  <header class="fade-top">
     <div class="container header-container">
       <div class="header-logo">
         <img src="logo-transparent-png.png" alt="CodeRepo Logo" height="65">
@@ -1000,18 +1070,25 @@ code {
   </header>
 
   <main>
-    <div class="container">
-      <section class="hero">
-        <h1>Developer Tools Repository</h1>
-        <p>Browse our collection of useful batch scripts, utilities, and developer tools. Download, copy, or modify them for your projects.</p>
-      </section>
-      
-      <section class="tools-section">
-        <div class="section-header">
-          <h2>Available Tools</h2>
-        </div>
+  <div class="container">
+    
+    <!-- Title + description fades in second -->
+    <section class="hero fade-middle">
+      <h1>Developer Tools Repository</h1>
+      <p>Browse our collection of useful batch scripts, utilities, and developer tools. Download, copy, or modify them for your projects.</p>
+    </section>
+
+    <!-- Tool cards fade in last -->
+    <section class="tools-section fade-late">
+  <div class="section-header">
+    <h2>Available Tools</h2>
+  </div>
+
+  
+
+
         
-        <div class="tool-grid">
+        <div class="tool-grid fade-late">
           <!-- AutoTyper Tool Card -->
           <div class="tool-card" id="autotyper">
             <div class="card-header">
@@ -1567,7 +1644,6 @@ pause
   </div>
 
 
-
   <script>
   
   
@@ -1747,6 +1823,7 @@ document.querySelectorAll('.collapsible').forEach(button => {
     }
   });
 });
+
 
   </script>
 </body>
