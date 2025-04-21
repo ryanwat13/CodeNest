@@ -1448,7 +1448,7 @@ setlocal EnableDelayedExpansion
 title Advanced Password Generator - With Length Cap + CMD Output
 
 :: Set output directory
-set "outputDir=D:\Everything Else\Coding Things\Random Batch Files\Generated Passwords"
+set "outputDir=%USERPROFILE%\Documents\Generated Passwords"
 if not exist "%outputDir%" (
     echo Creating output directory...
     mkdir "%outputDir%"
