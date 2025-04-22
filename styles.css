@@ -562,7 +562,7 @@ code {
 
    .suggestions {
   position: absolute;
-  top: 100%;
+  top: 110%;
   left: 0;
   width: calc(100% - 45px); /* 👈 leaves space for the search button */
   background-color: var(--card-bg);
