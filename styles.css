@@ -78,6 +78,7 @@
   /* Dark - Label */
   --code-bg: #162544;
   --code-text: #e3f2fd;
+  --scroll-thumb-color: #ffffff;
 
 }
 
@@ -126,6 +127,7 @@
   /* Dark Red - Label */
   --code-bg: #5a0a0a;
   --code-text: #ffcdd2;
+  --scroll-thumb-color: #dc2626;
 
 }
 
@@ -174,6 +176,7 @@
   /* Pure White - Label */
   --code-bg: #f3f3f3;
   --code-text: #0f172a;
+  --scroll-thumb-color: #333333;
 
 }
 
@@ -503,6 +506,8 @@ code {
   display: block;
   white-space: nowrap;
 }
+
+
 
     [data-theme="dark"] .dropdown-menu a:hover {
       background-color: var(--neutral-700);
@@ -1034,3 +1039,21 @@ footer {
     0% { transform: rotate(0); }
     100% { transform: rotate(360deg); }
   }
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--scroll-thumb-color);
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--primary-dark); /* or another variable */
+}
