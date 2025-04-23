@@ -175,9 +175,13 @@ document.querySelectorAll('.collapsible').forEach(button => {
   });
 });
 
+// ----------------------------
+// Page Loader Fade Out
+// ----------------------------
 window.addEventListener("load", () => {
   const loader = document.getElementById("page-loader");
   setTimeout(() => {
     loader.classList.add("hidden");
-  }, 700);
+  }, 2500); // <- You can increase this number to control the loader duration
 });
+
