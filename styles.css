@@ -337,6 +337,7 @@ code {
       max-width: var(--content-width);
       margin: 0 auto;
       padding: 0 var(--spacing-lg);
+	  
     }
 
     /* Header */
@@ -952,6 +953,21 @@ footer {
   }
 }
 
+@media (max-width: 768px) {
+  .controls {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  .search-wrapper {
+    width: 100%;
+    max-width: 100%;
+  }
+  .search-bar input {
+    width: 100%;
+  }
+}
+
 .site-footer {
   text-align: center;
   padding: 20px;
@@ -991,54 +1007,87 @@ footer {
 
 .fade-top {
   animation: fadeInTop 0.6s ease-out forwards;
-  animation-delay: 0.4s;
+  animation-delay: 2.9s;
   opacity: 0;
 }
 
 .fade-middle {
   animation: fadeInMiddle 0.8s ease-out forwards;
-  animation-delay: 0.7s;
+  animation-delay: 3.2s;
   opacity: 0;
 }
 
 .fade-late {
   animation: fadeInLate 0.8s ease-out forwards;
-  animation-delay: 1s;
+  animation-delay: 3.5s;
   opacity: 0;
 }
 
 .loader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: var(--bg-color);
-    z-index: 9999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: opacity 0.5s ease;
-  }
+  position: fixed;
+  inset: 0;
+  background-color: var(--bg-color);
+  display: flex;
+  flex-direction: column; /* Stack vertically */
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem; /* Adds space between spinner and dots */
+  z-index: 9999;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
 
-  .loader.hidden {
-    opacity: 0;
-    pointer-events: none;
-  }
+.dots-loader {
+  display: flex;
+  gap: 1rem;
+}
 
-  .spinner {
-    border: 4px solid var(--neutral-200);
-    border-top: 4px solid var(--primary-color);
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    animation: spin 1s linear infinite;
-  }
+.dots-loader span {
+  width: 35px;
+  height: 35px;
+  background-color: var(--primary-color);
+  border-radius: 50%;
+  animation: pulse 1.5s infinite ease-in-out;
+}
 
-  @keyframes spin {
-    0% { transform: rotate(0); }
-    100% { transform: rotate(360deg); }
+.dots-loader span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.dots-loader span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.5;
   }
+  50% {
+    transform: scale(1.4);
+    opacity: 1;
+  }
+}
+
+.loader.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.spinner {
+  width: 85px;
+  height: 85px;
+  border: 14px solid rgba(0, 0, 0, 0.1);
+  border-top: 10px solid var(--primary-color); /* or any accent color */
+  border-radius: 50%;
+  animation: spin 1.2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 
 ::-webkit-scrollbar {
   width: 8px;
@@ -1057,3 +1106,4 @@ footer {
 ::-webkit-scrollbar-thumb:hover {
   background-color: var(--primary-dark); /* or another variable */
 }
+
